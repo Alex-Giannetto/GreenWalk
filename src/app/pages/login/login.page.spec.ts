@@ -41,4 +41,30 @@ describe('LoginPage', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy()
 	})
+
+	it('should have two inputs', () => {
+		expect(elements.mail).toBeTruthy()
+		expect(elements.password).toBeTruthy()
+	})
+
+	it('submit button should be disable when form is empty', () => {
+		expect(elements.submit.nativeElement.disabled).toBeTruthy()
+	})
+
+	it('form should be invalid when bad email is passed', () => {
+		component.formGroup.controls.password.setValue('password')
+		expect(component.formGroup.valid).toBeFalsy()
+	})
+
+	it('form should be invalid when no password is passed', () => {
+		component.formGroup.controls.email.setValue('user@mail.com')
+		expect(component.formGroup.valid).toBeFalsy()
+	})
+
+	it('form should be valid', () => {
+		expect(component.formGroup.valid).toBeFalsy()
+		component.formGroup.controls.email.setValue('user@mail.com')
+		component.formGroup.controls.password.setValue('password')
+		expect(component.formGroup.valid).toBeTruthy()
+	})
 })
