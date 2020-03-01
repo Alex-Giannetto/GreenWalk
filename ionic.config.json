@@ -1,5 +1,7 @@
 {
   "name": "GreenWalk",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
