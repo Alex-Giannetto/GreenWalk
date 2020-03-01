@@ -14,8 +14,12 @@ describe('AuthService', () => {
 		expect(service).toBeTruthy()
 	})
 
-	it('could not return an user object', () => {
-		expect(service.getUser()).toBeFalsy()
+	it('should return null', () => {
+		expect(AuthService.getUser()).toBeFalsy()
+	})
+
+	it('should return null', () => {
+		expect(AuthService.getToken()).toBeFalsy()
 	})
 
 })
