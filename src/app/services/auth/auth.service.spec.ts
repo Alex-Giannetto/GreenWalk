@@ -3,10 +3,19 @@ import { TestBed } from '@angular/core/testing'
 import { AuthService } from './auth.service'
 
 describe('AuthService', () => {
-	beforeEach(() => TestBed.configureTestingModule({}))
+	let service: AuthService
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({})
+		service = TestBed.get(AuthService)
+	})
 
 	it('should be created', () => {
-		const service: AuthService = TestBed.get(AuthService)
 		expect(service).toBeTruthy()
 	})
+
+	it('could not return an user object', () => {
+		expect(service.getUser()).toBeFalsy()
+	})
+
 })
