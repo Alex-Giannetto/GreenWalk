@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { MenuController } from '@ionic/angular'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
 	selector: 'app-login',
@@ -8,13 +9,29 @@ import { MenuController } from '@ionic/angular'
 })
 export class LoginPage implements OnInit {
 
-	constructor (private menuController: MenuController) { }
+	formGroup: FormGroup
 
-	ionViewWillEnter () {
+	constructor (private menuController: MenuController, private formBuilder: FormBuilder) { }
+
+	ionViewWillEnter (): void {
 		this.menuController.enable(false).then()
 	}
 
-	ngOnInit () {
+	ngOnInit (): void {
+		this.formGroup = this.formBuilder.group({
+			email: new FormControl(null, [
+				Validators.required,
+				Validators.email
+			]),
+
+			password: new FormControl(null, [
+				Validators.required,
+			])
+		})
+	}
+
+	onSubmit (): void {
+		alert('form submitted successfully')
 	}
 
 }
