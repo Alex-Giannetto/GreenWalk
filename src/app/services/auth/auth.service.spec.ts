@@ -1,12 +1,19 @@
 import { TestBed } from '@angular/core/testing'
 
 import { AuthService } from './auth.service'
+import { AuthRequestService } from '../../requests/auth/auth-request.service'
+
+const authRequestServiceMock = {}
 
 describe('AuthService', () => {
 	let service: AuthService
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({})
+		TestBed.configureTestingModule({
+			providers: [
+				{ provide: AuthRequestService, useValue: authRequestServiceMock }
+			]
+		})
 		service = TestBed.get(AuthService)
 	})
 

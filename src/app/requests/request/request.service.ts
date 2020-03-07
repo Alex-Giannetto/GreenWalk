@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
+import { AuthService } from '../../services/auth/auth.service'
+import { environment } from '../../../environments/environment'
 
 @Injectable({
 	providedIn: 'root'
@@ -9,7 +11,25 @@ export class RequestService {
 
 	constructor (private httpClient: HttpClient) { }
 
-	get (url): Observable<object> {
-		return this.httpClient.get(url)
+	get (url: string, headers: { [key: string]: string } = null, prefixUrl: boolean = true): Observable<object> {
+		url = prefixUrl ? environment.api.url + url : url
+		return this.httpClient.get(url, this.getHeader(headers))
+	}
+
+	post (url: string, data: object, headers: { [key: string]: string } = null, prefixUrl: boolean = true): Observable<object> {
+		url = prefixUrl ? environment.api.url + url : url
+		return this.httpClient.post(url, data, this.getHeader(headers))
+	}
+
+	getHeader (headers: { [key: string]: string }): { headers: HttpHeaders } {
+		const token = AuthService.getToken()
+
+		const xAuthTokenHeader = token ? {
+			'X-AUTH-TOKEN': token,
+		} : {}
+
+		return {
+			headers: new HttpHeaders({ ...xAuthTokenHeader, ...headers })
+		}
 	}
 }

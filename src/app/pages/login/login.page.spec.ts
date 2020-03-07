@@ -5,6 +5,9 @@ import { LoginPage } from './login.page'
 import { DebugElement } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
+import { AuthService } from '../../services/auth/auth.service'
+
+const authServiceMock = {}
 
 describe('LoginPage', () => {
 	let component: LoginPage
@@ -23,6 +26,9 @@ describe('LoginPage', () => {
 				IonicModule.forRoot(),
 				ReactiveFormsModule,
 				FormsModule
+			],
+			providers: [
+				{ provide: AuthService, useValue: authServiceMock }
 			]
 		}).compileComponents()
 

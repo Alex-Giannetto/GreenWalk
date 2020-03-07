@@ -1,7 +1,7 @@
 import { Person } from './person'
 
 export interface User extends Person {
-	mail: string
+	email: string
 	token: string
 	birthDate: string
 }
