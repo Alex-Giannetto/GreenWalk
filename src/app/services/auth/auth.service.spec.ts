@@ -46,7 +46,7 @@ describe('AuthService', () => {
 		expect(service.signIn(email, password)).toBeTruthy()
 	}))
 
-	it('should return a token', fakeAsync(() => {
+	it('should return an user', fakeAsync(() => {
 		const token = 'token'
 		expect(service.setUser(token)).toBeTruthy()
 	}))
