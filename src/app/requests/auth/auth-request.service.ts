@@ -9,7 +9,7 @@ export class AuthRequestService {
 
 	constructor (private requestService: RequestService) { }
 
-	sigIn (email: string, password: string): Observable<any> {
+	signIn (email: string, password: string): Observable<any> {
 		return this.requestService.post('auth/signin', { email, password })
 	}
 

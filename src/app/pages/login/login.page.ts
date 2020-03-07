@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
 
 	onSubmit (): void {
 		const { email, password } = this.formGroup.value
-		this.authService.sigIn(email, password).then()
+		this.authService.signIn(email, password).then()
 	}
 
 }

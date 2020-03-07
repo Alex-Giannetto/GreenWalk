@@ -21,27 +21,31 @@ export class AuthService {
 		return user ? user.token : null
 	}
 
-	getUser (token: string): Promise<User> {
-		const onSuccess = data => {
-			if (data.id) {
-				localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(data))
-			}
-		}
-
+	setUser (token: string): Promise<User> {
 		return new Promise<User>((resolve, reject) => {
-			this.authRequestService.getUser(token).subscribe(onSuccess, e => this.handleError(e, reject))
+			this.authRequestService.getUser(token).subscribe(data => {
+				if (data.id) {
+					localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(data))
+					resolve(data as User)
+				}
+
+				reject('Mauvais retours de l\'api')
+			}, e => this.handleError(e, reject))
 		})
 	}
 
-	sigIn (email: string, password: string): Promise<boolean> {
+	signIn (email: string, password: string): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
-			this.authRequestService.sigIn(email, password).subscribe(async data => {
+			this.authRequestService.signIn(email, password).subscribe(async data => {
 
-				if (data.token) {
-					const user = await this.getUser(data.token)
-
-					console.log(user)
+				if (!data.token) {
+					reject('Mauvais retours de l\'api')
 				}
+				if (await this.setUser(data.token)) {
+					resolve(true)
+				}
+
+				reject('Aucune information d\'utilisateur')
 
 			}, e => this.handleError(e, reject))
 		})
