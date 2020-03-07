@@ -29,16 +29,6 @@ describe('AuthService', () => {
 		expect(service).toBeTruthy()
 	})
 
-	it('should not have user', () => {
-		localStorage.clear()
-		expect(AuthService.getUser()).toBeFalsy()
-	})
-
-	it('should not have token', () => {
-		localStorage.clear()
-		expect(AuthService.getToken()).toBeFalsy()
-	})
-
 	it('should return a token', fakeAsync(() => {
 		const email = 'admin@mail.com'
 		const password = 'password'

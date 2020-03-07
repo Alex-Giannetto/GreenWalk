@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core'
 import { User } from '../../interfaces/user'
 import { AuthRequestService } from '../../requests/auth/auth-request.service'
-
-export const LOCAL_STORAGE_USER = 'user'
+import { LocalService } from '../local/local.service'
 
 @Injectable({
 	providedIn: 'root'
@@ -11,22 +10,12 @@ export class AuthService {
 
 	constructor (private authRequestService: AuthRequestService) { }
 
-	static getUser (): User {
-		const localData = localStorage.getItem(LOCAL_STORAGE_USER)
-		return localData ? JSON.parse(localData) as User : null
-	}
-
-	static getToken (): string {
-		const user = AuthService.getUser()
-		return user ? user.token : null
-	}
-
 	setUser (token: string): Promise<User> {
 		return new Promise<User>((resolve, reject) => {
 			this.authRequestService.getUser(token).subscribe(data => {
 				if (data.id) {
-					localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(data))
-					resolve(data as User)
+					LocalService.setUser(data)
+					resolve(data)
 				}
 
 				reject('Mauvais retours de l\'api')
@@ -41,6 +30,7 @@ export class AuthService {
 				if (!data.token) {
 					reject('Mauvais retours de l\'api')
 				}
+
 				if (await this.setUser(data.token)) {
 					resolve(true)
 				}

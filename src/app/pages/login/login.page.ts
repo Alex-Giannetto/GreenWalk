@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { MenuController } from '@ionic/angular'
+import { MenuController, NavController } from '@ionic/angular'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth/auth.service'
 
@@ -15,7 +15,8 @@ export class LoginPage implements OnInit {
 	constructor (
 		private menuController: MenuController,
 		private formBuilder: FormBuilder,
-		private authService: AuthService
+		private authService: AuthService,
+		private navController: NavController
 	) { }
 
 	ionViewWillEnter (): void {
@@ -37,7 +38,9 @@ export class LoginPage implements OnInit {
 
 	onSubmit (): void {
 		const { email, password } = this.formGroup.value
-		this.authService.signIn(email, password).then()
+		this.authService.signIn(email, password).then(success => {
+			this.navController.navigateRoot('/home').then()
+		})
 	}
 
 }

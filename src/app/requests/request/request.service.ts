@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { AuthService } from '../../services/auth/auth.service'
 import { environment } from '../../../environments/environment'
+import { LocalService } from '../../services/local/local.service'
 
 @Injectable({
 	providedIn: 'root'
@@ -22,7 +22,7 @@ export class RequestService {
 	}
 
 	getHeader (headers: { [key: string]: string }): { headers: HttpHeaders } {
-		const token = AuthService.getToken()
+		const token = LocalService.getToken()
 
 		const xAuthTokenHeader = token ? {
 			'X-AUTH-TOKEN': token,
