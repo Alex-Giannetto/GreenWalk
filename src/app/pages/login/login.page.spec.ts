@@ -1,10 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { IonicModule } from '@ionic/angular'
+import { IonicModule, LoadingController, NavController, ToastController } from '@ionic/angular'
 
 import { LoginPage } from './login.page'
 import { DebugElement } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
+import { AuthService } from '../../services/auth/auth.service'
+
+const Mock = {
+	authService: {
+		signIn: (email: string, password: string) => {}
+	},
+	navController: {}
+}
+
+const Spy = {
+	navController: null
+}
 
 describe('LoginPage', () => {
 	let component: LoginPage
@@ -22,7 +34,13 @@ describe('LoginPage', () => {
 			imports: [
 				IonicModule.forRoot(),
 				ReactiveFormsModule,
-				FormsModule
+				FormsModule,
+			],
+			providers: [
+				{ provide: AuthService, useValue: Mock.authService },
+				{ provide: NavController, useValue: Mock.navController },
+				ToastController,
+				LoadingController,
 			]
 		}).compileComponents()
 
