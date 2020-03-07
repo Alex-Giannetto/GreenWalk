@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { MenuController, NavController } from '@ionic/angular'
+import { LoadingController, MenuController, NavController, ToastController } from '@ionic/angular'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth/auth.service'
 
@@ -16,7 +16,9 @@ export class LoginPage implements OnInit {
 		private menuController: MenuController,
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		private navController: NavController
+		private navController: NavController,
+		private loadingController: LoadingController,
+		private toastController: ToastController
 	) { }
 
 	ionViewWillEnter (): void {
@@ -36,10 +38,26 @@ export class LoginPage implements OnInit {
 		})
 	}
 
-	onSubmit (): void {
+	async onSubmit () {
 		const { email, password } = this.formGroup.value
-		this.authService.signIn(email, password).then(success => {
+
+		const loading = await this.loadingController.create({
+			message: 'Chargement…'
+		})
+
+		await loading.present()
+
+		this.authService.signIn(email, password).then(async success => {
 			this.navController.navigateRoot('/home').then()
+			await loading.dismiss()
+		}).catch(async e => {
+			(await this.toastController.create({
+				message: 'Une erreur est survenue',
+				position: 'top',
+				color: 'danger',
+				duration: 5000
+			})).present()
+			await loading.dismiss()
 		})
 	}
 

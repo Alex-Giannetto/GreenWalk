@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { IonicModule, NavController } from '@ionic/angular'
+import { IonicModule, LoadingController, NavController, ToastController } from '@ionic/angular'
 
 import { LoginPage } from './login.page'
 import { DebugElement } from '@angular/core'
@@ -38,7 +38,9 @@ describe('LoginPage', () => {
 			],
 			providers: [
 				{ provide: AuthService, useValue: Mock.authService },
-				{ provide: NavController, useValue: Mock.navController }
+				{ provide: NavController, useValue: Mock.navController },
+				ToastController,
+				LoadingController,
 			]
 		}).compileComponents()
 

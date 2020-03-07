@@ -6,21 +6,21 @@
                 <h2 class="page_subtitle ion-padding-bottom">Veuillez saisir vos informations<br> de connexion</h2>
             </header>
 
-            <div [formGroup]='formGroup'>
+            <form [formGroup]='formGroup'>
                 <div class="formControl">
                     <label>
                         Email
-                        <input formControlName="email" type="email">
+                        <input formControlName="email" type="email" autocomplete="email">
                     </label>
                 </div>
 
                 <div class="formControl ion-padding-bottom">
                     <label>
                         Mot de passe
-                        <input formControlName="password" type="password">
+                        <input formControlName="password" type="password" autocomplete="current-password">
                     </label>
                 </div>
-            </div>
+            </form>
         </div>
 
         <ion-button (click)='onSubmit()' [disabled]='this.formGroup.invalid' class="btn uppercase" type='submit'>
