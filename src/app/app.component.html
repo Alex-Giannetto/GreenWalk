@@ -1,5 +1,5 @@
 <ion-app>
-    <ion-split-pane contentId="main-content">
+    <ion-split-pane contentId="main-content" [disabled]="!isLogged()">
         <ion-menu contentId="main-content" type="overlay">
             <ion-content>
                 <ion-list id="inbox-list">
@@ -7,7 +7,8 @@
                     <ion-note>hi@ionicframework.com</ion-note>
 
                     <ion-menu-toggle *ngFor="let p of appPages; let i = index" auto-hide="false">
-                        <ion-item (click)="selectedIndex = i" [class.selected]="selectedIndex == i" [routerLink]="[p.url]" detail="false"
+                        <ion-item (click)="selectedIndex = i" [class.selected]="selectedIndex == i"
+                                  [routerLink]="[p.url]" detail="false"
                                   lines="none" routerDirection="root">
                             <ion-icon [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" slot="start"></ion-icon>
                             <ion-label>{{ p.title }}</ion-label>
