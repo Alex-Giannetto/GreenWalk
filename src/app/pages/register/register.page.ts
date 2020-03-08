@@ -10,6 +10,7 @@ import { RegisterForm } from '../../forms/register.form'
 export class RegisterPage {
 
 	formGroup: FormGroup = RegisterForm
+	step: number = 0
 
 	constructor () { }
 
