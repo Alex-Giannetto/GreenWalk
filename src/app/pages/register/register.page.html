@@ -2,25 +2,13 @@
     <div class='page ion-padding'>
         <div>
             <header>
-                <h1 class="page_title" id="PageTitle">Connexion</h1>
-                <h2 class="page_subtitle ion-padding-bottom">Veuillez saisir vos informations<br> de connexion</h2>
+                <h1 class="page_title" id="PageTitle">Bienvenue<br>Alex</h1>
+                <h2 class="page_subtitle ion-padding-bottom"></h2>
             </header>
 
-            <!--            <form [formGroup]='formGroup'>-->
-            <!--                <div class="formControl">-->
-            <!--                    <label>-->
-            <!--                        Email-->
-            <!--                        <input formControlName="email" type="email" autocomplete="email">-->
-            <!--                    </label>-->
-            <!--                </div>-->
 
-            <!--                <div class="formControl ion-padding-bottom">-->
-            <!--                    <label>-->
-            <!--                        Mot de passe-->
-            <!--                        <input formControlName="password" type="password" autocomplete="current-password">-->
-            <!--                    </label>-->
-            <!--                </div>-->
-            <!--            </form>-->
+            <ng-container *ngTemplateOutlet="slide1"></ng-container>
+
         </div>
 
         <ion-button class="btn uppercase" type='submit'>
@@ -28,3 +16,31 @@
         </ion-button>
     </div>
 </ion-content>
+
+<ng-template #slide1>
+    <form [formGroup]='formGroup'>
+        <div formGroupName="step1">
+
+            <div class="formControl">
+                <label>
+                    Prénom usuel
+                    <input formControlName="email" type="email" autocomplete="given-name">
+                </label>
+            </div>
+
+            <div class="formControl">
+                <label>
+                    Email
+                    <input formControlName="email" type="email" autocomplete="email">
+                </label>
+            </div>
+
+            <div class="formControl">
+                <label>
+                    Date de naissance
+                    <input formControlName="birthDate" type="date" autocomplete="bday"/>
+                </label>
+            </div>
+        </div>
+    </form>
+</ng-template>
