@@ -8,10 +8,45 @@ import { RegisterForm } from '../../forms/register.form'
 	styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage {
-
 	formGroup: FormGroup = RegisterForm
-	step: number = 0
+	step: number = 3
+	cguHasBeenRead: boolean = false
 
-	constructor () { }
+	isGroupIsValid (): boolean {
+		return this.getGroup(this.step).valid
+	}
 
+	nextStep (): void {
+		if (this.getGroup(this.step).invalid) {
+			return
+		}
+
+		if (this.step === 3) {
+			return
+		}
+
+		this.step++
+	}
+
+	previousStep () {
+		if (this.step <= 1) {
+			return
+		}
+
+		this.step--
+	}
+
+	onScroll (event: Event) {
+		console.log('read')
+
+		if (this.step !== 3) {
+			return
+		}
+
+		this.cguHasBeenRead = true
+	}
+
+	private getGroup (step: number): FormGroup {
+		return this.formGroup.controls['step' + step] as FormGroup
+	}
 }

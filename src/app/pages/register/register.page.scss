@@ -1,0 +1,22 @@
+.page_title {
+  margin: 0 auto;
+  padding: 30px 0;
+  @media screen and (min-width: 800px) {
+    max-width: 60vw;
+  }
+
+  .welcome, .name {
+    font-size: 50px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+  }
+
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 40px;
+  }
+
+}
