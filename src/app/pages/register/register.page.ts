@@ -29,21 +29,9 @@ export class RegisterPage {
 	}
 
 	previousStep () {
-		if (this.step <= 1) {
-			return
+		if (this.step > 1) {
+			this.step--
 		}
-
-		this.step--
-	}
-
-	onScroll (event: Event) {
-		console.log('read')
-
-		if (this.step !== 3) {
-			return
-		}
-
-		this.cguHasBeenRead = true
 	}
 
 	private getGroup (step: number): FormGroup {

@@ -1,8 +1,9 @@
 <ion-header>
     <ion-toolbar>
-        <ion-buttons slot="start" (click)="previousStep()" [hidden]="step < 2">
+        <ion-buttons slot="start" (click)="previousStep()" [hidden]="step < 2" class="ion-activatable ripple-parent">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
             Précédent
+            <ion-ripple-effect></ion-ripple-effect>
         </ion-buttons>
     </ion-toolbar>
 
@@ -35,7 +36,7 @@
         *ngIf="step !== 3 else accept "
         (click)="nextStep()"
         [disabled]="!isGroupIsValid()"
-        class="btn" type='submit'>
+        class="btn">
         Valider
     </ion-button>
 </ion-footer>
