@@ -13,7 +13,7 @@
 
   input, select, ion-textarea {
     background-color: var(--ion-color-light);
-    border: none;
+    border: 1px solid transparent;
     width: 100%;
     margin: 5px 0 20px 0;
     padding: 15px;
@@ -24,6 +24,10 @@
 
     &:focus {
       outline: none;
+    }
+
+    &.ng-touched.ng-invalid {
+      border: solid 1px var(--ion-color-danger);
     }
   }
 }

@@ -1,4 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { AgeValidator } from '../validators/age.validator'
 
 export const RegisterForm: FormGroup = new FormGroup({
 	step1: new FormGroup({
@@ -11,6 +12,7 @@ export const RegisterForm: FormGroup = new FormGroup({
 		]),
 		birthDate: new FormControl(null, [
 			Validators.required,
+			AgeValidator
 		]),
 	}),
 

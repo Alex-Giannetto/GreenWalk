@@ -9,7 +9,7 @@ import { RegisterForm } from '../../forms/register.form'
 })
 export class RegisterPage {
 	formGroup: FormGroup = RegisterForm
-	step: number = 3
+	step: number = 1
 
 	isGroupIsValid (): boolean {
 		return this.getGroup(this.step).valid
