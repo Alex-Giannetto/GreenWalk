@@ -4,7 +4,6 @@ export const RegisterForm: FormGroup = new FormGroup({
 	step1: new FormGroup({
 		firstName: new FormControl(null, [
 			Validators.required,
-			Validators.email
 		]),
 		email: new FormControl(null, [
 			Validators.required,
@@ -25,10 +24,4 @@ export const RegisterForm: FormGroup = new FormGroup({
 			Validators.minLength(8)
 		]),
 	}),
-
-	step3: new FormGroup({
-		cgu: new FormControl(null, [
-			Validators.required,
-		])
-	})
 })
