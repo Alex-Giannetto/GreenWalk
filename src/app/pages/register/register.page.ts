@@ -10,7 +10,6 @@ import { RegisterForm } from '../../forms/register.form'
 export class RegisterPage {
 	formGroup: FormGroup = RegisterForm
 	step: number = 3
-	cguHasBeenRead: boolean = false
 
 	isGroupIsValid (): boolean {
 		return this.getGroup(this.step).valid
