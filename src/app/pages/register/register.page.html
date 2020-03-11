@@ -33,13 +33,24 @@
 </ion-content>
 
 <ion-footer class="ion-padding">
-    <ion-button
-        *ngIf="step !== 3 else accept "
-        (click)="nextStep()"
-        [disabled]="!isGroupIsValid()"
-        class="btn">
-        Valider
-    </ion-button>
+
+    <ion-text color="danger">
+        <p class="ion-text-center">
+            <ng-container *ngIf="formGroup.controls.step2.errors && formGroup.controls.step2.errors.notSame ">
+                Les mots de passe doivent être similaire
+            </ng-container>
+        </p>
+    </ion-text>
+
+    <div class="formControl">
+        <ion-button
+            *ngIf="step !== 3 else accept "
+            (click)="nextStep()"
+            [disabled]="!isGroupIsValid()"
+            class="btn">
+            Valider
+        </ion-button>
+    </div>
 </ion-footer>
 
 <ng-template #slide1>

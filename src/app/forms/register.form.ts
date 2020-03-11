@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AgeValidator } from '../validators/age.validator'
+import { PasswordsValidators } from '../validators/passwords.validator'
 
 export const RegisterForm: FormGroup = new FormGroup({
 	step1: new FormGroup({
@@ -25,5 +26,5 @@ export const RegisterForm: FormGroup = new FormGroup({
 			Validators.required,
 			Validators.minLength(8)
 		]),
-	}),
+	}, { validators: PasswordsValidators }),
 })
