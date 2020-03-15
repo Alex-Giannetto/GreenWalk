@@ -47,6 +47,7 @@
             *ngIf="step !== 3 else accept "
             (click)="nextStep()"
             [disabled]="!isGroupIsValid()"
+            id="next"
             class="btn">
             Valider
         </ion-button>
@@ -139,7 +140,7 @@
 </ng-template>
 
 <ng-template #accept>
-    <ion-button class="btn">
+    <ion-button class="btn" id="submit">
         J'accepte
     </ion-button>
 </ng-template>
