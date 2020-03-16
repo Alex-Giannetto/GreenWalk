@@ -13,12 +13,12 @@ export class AuthService {
 	setUser (token: string): Promise<User> {
 		return new Promise<User>((resolve, reject) => {
 			this.authRequestService.getUser(token).subscribe(data => {
-				if (data.id) {
-					LocalService.setUser(data)
-					resolve(data)
+				if (!data.id) {
+					reject('Mauvais retours de l\'api')
 				}
 
-				reject('Mauvais retours de l\'api')
+				LocalService.setUser(data)
+				resolve(data)
 			}, e => this.handleError(e, reject))
 		})
 	}
@@ -41,7 +41,24 @@ export class AuthService {
 		})
 	}
 
-	handleError (error: string, reject: (reason) => void) {
+	register (email: string, firstName: string, birthDate: string, password: string): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			this.authRequestService.register(email, firstName, birthDate, password).subscribe(async data => {
+				if (!data.token) {
+					reject('Mauvais retours de l\'api')
+				}
+
+				if (await this.setUser(data.token)) {
+					resolve(true)
+				}
+
+				reject('Aucune information d\'utilisateur')
+
+			}, e => this.handleError(e, reject))
+		})
+	}
+
+	private handleError (error: string, reject: (reason) => void) {
 		reject(error)
 	}
 }
