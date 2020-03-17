@@ -1,9 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { IonicModule } from '@ionic/angular'
+import { IonicModule, LoadingController, NavController, ToastController } from '@ionic/angular'
 
 import { RegisterPage } from './register.page'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
+import { AuthService } from '../../services/auth/auth.service'
+
+const Mock = {
+	authService: {},
+	navController: {}
+}
 
 describe('RegistrationPage', () => {
 	let component: RegisterPage
@@ -12,13 +18,19 @@ describe('RegistrationPage', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [RegisterPage],
-			imports: [IonicModule.forRoot(), ReactiveFormsModule]
+			imports: [IonicModule.forRoot(), ReactiveFormsModule],
+			providers: [
+				{ provide: AuthService, useValue: Mock.authService },
+				{ provide: NavController, useValue: Mock.navController },
+				ToastController,
+				LoadingController,
+			]
 		}).compileComponents()
 
 		fixture = TestBed.createComponent(RegisterPage)
 		component = fixture.componentInstance
-		fixture.detectChanges()
 		component.formGroup.reset()
+		fixture.detectChanges()
 	}))
 
 	it('should create', () => {
@@ -68,6 +80,11 @@ describe('RegistrationPage', () => {
 
 		expect(step2.valid).toBeTruthy()
 		expect(nextBtn.disabled).toBeFalsy()
+	})
+
+	it('should not send form if invalid', async () => {
+		component.formGroup.reset()
+		expect(await component.submit()).toBeFalsy()
 	})
 
 })
