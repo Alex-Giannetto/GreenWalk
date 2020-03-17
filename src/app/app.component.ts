@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Platform } from '@ionic/angular'
 import { SplashScreen } from '@ionic-native/splash-screen/ngx'
 import { StatusBar } from '@ionic-native/status-bar/ngx'
+import { LocalService } from './services/local/local.service'
 
 @Component({
 	selector: 'app-root',
@@ -65,5 +66,9 @@ export class AppComponent implements OnInit {
 		if (path !== undefined) {
 			this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase())
 		}
+	}
+
+	isLogged (): boolean {
+		return !!LocalService.getUser()
 	}
 }

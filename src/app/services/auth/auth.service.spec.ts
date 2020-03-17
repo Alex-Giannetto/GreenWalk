@@ -10,7 +10,8 @@ function fakeObservable<T> (data: T): Observable<T> {
 
 const authRequestServiceMock = {
 	signIn: (email: string, password: string) => fakeObservable({ token: 'token' }),
-	getUser: (token: string) => fakeObservable({ id: 'abc' })
+	getUser: (token: string) => fakeObservable({ id: 'id' }),
+	register: (email: string, firstName: string, birthDate: string, password: string) => fakeObservable({ token: 'token' })
 }
 
 describe('AuthService', () => {
@@ -29,7 +30,7 @@ describe('AuthService', () => {
 		expect(service).toBeTruthy()
 	})
 
-	it('should return a token', fakeAsync(() => {
+	it('should signIn', fakeAsync(() => {
 		const email = 'admin@mail.com'
 		const password = 'password'
 
@@ -39,6 +40,10 @@ describe('AuthService', () => {
 	it('should return an user', fakeAsync(() => {
 		const token = 'token'
 		expect(service.setUser(token)).toBeTruthy()
+	}))
+
+	it('should register', fakeAsync(() => {
+		expect(service.register('email', 'firstName', 'birthDate', 'password')).toBeTruthy()
 	}))
 
 })

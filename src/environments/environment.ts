@@ -5,7 +5,7 @@
 export const environment = {
 	production: false,
 	api: {
-		url: 'http://localhost/api/'
+		url: 'http://preprod.api.green-walk.fr/api/'
 	}
 }
 

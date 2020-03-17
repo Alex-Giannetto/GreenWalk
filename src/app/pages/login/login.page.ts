@@ -21,10 +21,6 @@ export class LoginPage implements OnInit {
 		private toastController: ToastController
 	) { }
 
-	ionViewWillEnter (): void {
-		this.menuController.enable(false).then()
-	}
-
 	ngOnInit (): void {
 		this.formGroup = this.formBuilder.group({
 			email: new FormControl(null, [

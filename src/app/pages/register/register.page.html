@@ -1,0 +1,146 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start" (click)="previousStep()" [hidden]="step < 2" class="ion-activatable ripple-parent">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+            Précédent
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <div class='ion-padding'>
+        <header>
+            <h1 class="page_title" id="PageTitle">
+                <span class="welcome">Bienvenue</span>
+                <span class="name">{{formGroup.value.step1.firstName | titlecase}}</span>
+            </h1>
+        </header>
+
+        <ng-container *ngIf="step === 1">
+            <ng-container *ngTemplateOutlet="slide1"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="step === 2">
+            <ng-container *ngTemplateOutlet="slide2"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="step === 3">
+            <ng-container *ngTemplateOutlet="slide3"></ng-container>
+        </ng-container>
+    </div>
+</ion-content>
+
+<ion-footer class="ion-padding">
+
+    <ion-text color="danger">
+        <p class="ion-text-center">
+            <ng-container *ngIf="formGroup.controls.step2.errors && formGroup.controls.step2.errors.notSame ">
+                Les mots de passe doivent être similaire
+            </ng-container>
+        </p>
+    </ion-text>
+
+    <div class="formControl">
+        <ion-button
+            *ngIf="step !== 3 else accept "
+            (click)="nextStep()"
+            [disabled]="!isGroupIsValid()"
+            id="next"
+            class="btn">
+            Valider
+        </ion-button>
+    </div>
+</ion-footer>
+
+<ng-template #slide1>
+    <form [formGroup]='formGroup'>
+        <div formGroupName="step1">
+            <div class="formControl">
+                <label>
+                    Prénom usuel
+                    <input formControlName="firstName" type="text" autocomplete="given-name" autocapitalize="sentences">
+                </label>
+            </div>
+
+            <div class="formControl">
+                <label>
+                    Email
+                    <input formControlName="email" type="email" autocomplete="email">
+                </label>
+            </div>
+
+            <div class="formControl">
+                <label>
+                    Date de naissance
+                    <input formControlName="birthDate" type="date" autocomplete="bday"/>
+                </label>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #slide2>
+    <form [formGroup]='formGroup'>
+        <div formGroupName="step2">
+            <div class="formControl">
+                <label>
+                    Mot de passe
+                    <input
+                        formControlName="password"
+                        type="password"
+                        autocomplete="new-password">
+                </label>
+            </div>
+            <div class="formControl">
+                <label>
+                    Vérification du mot de passe
+                    <input
+                        formControlName="repeatPassword"
+                        type="password"
+                        autocomplete="new-password">
+                </label>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #slide3>
+    <h1>Conditions générales d'utilisation</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium amet atque autem deleniti dicta dolorem
+        doloribus dolorum, est, impedit ipsa ipsam iure maiores natus nesciunt, odit omnis perspiciatis quaerat quasi
+        qui quidem quo repellat sed sit vero. Dignissimos dolore doloribus ea, eaque enim eos, eveniet facere harum illo
+        impedit, ipsum molestiae neque officiis placeat praesentium quae rerum? Adipisci assumenda dolores ex maxime nam
+        odio omnis possimus, praesentium quae quo. A assumenda deserunt ea in itaque, minus mollitia odio possimus
+    </p>
+    <h3>Aperiam earum exercitationem</h3>
+    <p>
+        recusandae. Aperiam earum exercitationem sed suscipit voluptates! Animi blanditiis cupiditate delectus dolores,
+        dolorum et facere in nemo perferendis placeat possimus praesentium, provident repellat repellendus sunt. Dicta
+        hic magnam natus. Fugiat quis sapiente voluptatem! Expedita facere tenetur unde? Consequuntur esse maiores omnis
+        optio qui? Adipisci doloribus mollitia necessitatibus. Accusamus aliquid cum debitis ea eveniet quisquam
+        reiciendis repudiandae! Architecto deserunt dolores dolorum fugit harum in labore neque perspiciatis quaerat qui
+        quisquam quod, quos repudiandae saepe sint! Aliquid explicabo quidem sequi tempore? Aut commodi consequatur
+        consequuntur debitis deserunt dolor dolorem dolorum ducimus ea earum eius eligendi eos facere fugit, in incidunt
+        ipsum iste iusto maiores modi molestiae nemo nobis obcaecati placeat quibusdam quod repellat sint tempore
+        temporibus tenetur ullam veniam voluptas voluptatum? Corporis dicta doloremque dolores dolorum facere itaque non
+        placeat repellendus tempore vel. Aperiam assumenda consequatur culpa cumque ducimus facere necessitatibus
+    </p>
+    <h3>Alias asperiores</h3>
+    <p>
+        nesciunt, non nulla optio saepe sequi suscipit tenetur vel voluptatibus. Alias asperiores culpa cum deserunt
+        dolor eligendi eos esse impedit labore natus nobis officiis omnis perferendis quidem ratione rem reprehenderit
+        similique, totam unde velit. Adipisci atque aut consequatur cum cumque deserunt dignissimos doloremque dolores
+        esse exercitationem illum impedit incidunt, ipsa labore, laudantium magni neque obcaecati perferendis porro
+        quidem ratione rerum sapiente temporibus ullam vel vero voluptate! Aliquam consequatur delectus earum ex ipsum
+        iste modi molestias omnis placeat, praesentium velit vitae voluptatibus.
+    </p>
+</ng-template>
+
+<ng-template #accept>
+    <ion-button class="btn" id="submit" (click)="submit()">
+        J'accepte
+    </ion-button>
+</ng-template>
