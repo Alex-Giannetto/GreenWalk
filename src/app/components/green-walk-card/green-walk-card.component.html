@@ -1,10 +1,11 @@
-<div class="card">
-    <header>
-        <div class="infos">
-            <ion-text class="location">{{greenWalk.name}}</ion-text>
-            <ion-text class="date">{{greenWalk.datetime}}</ion-text>
-        </div>
+<ion-card>
+    <div class="participants">
         <app-participants [greenWalk]="greenWalk"></app-participants>
-    </header>
-    <img [src]="greenWalk.location.image" alt="Localisation de la sortie" class="map"/>
-</div>
+    </div>
+    <img src="https://bit.ly/2UgaGfZ"/>
+    <ion-card-header>
+        <ion-card-subtitle>{{greenWalk.datetime}}</ion-card-subtitle>
+        <ion-card-title>{{greenWalk.name}}</ion-card-title>
+    </ion-card-header>
+</ion-card>
+

@@ -13,4 +13,12 @@
         </ion-toolbar>
     </ion-header>
 
+    <div class="greenwalk-list" id="greenwalk-list">
+        <app-green-walk-card
+            *ngFor="let greenWalk of greenWalks"
+            [greenWalk]="greenWalk"
+        ></app-green-walk-card>
+    </div>
+
+
 </ion-content>

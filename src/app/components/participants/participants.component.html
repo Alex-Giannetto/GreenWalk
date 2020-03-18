@@ -1,4 +1,5 @@
 <div class="people">
+    <app-avatar [person]="greenWalk.author" [round]="true" size="little"></app-avatar>
     <div *ngIf="greenWalk.participant.length > 1" class="number">
         <div class="text"><span class="plus">+</span>{{greenWalk.participant.length}}</div>
         <div class="rounds">
@@ -7,5 +8,4 @@
             <span class="round"></span>
         </div>
     </div>
-    <app-avatar [person]="greenWalk.author" [round]="true" size="little"></app-avatar>
 </div>
