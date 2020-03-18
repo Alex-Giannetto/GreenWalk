@@ -4,17 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'login',
+		redirectTo: 'green-walks',
 		pathMatch: 'full'
-	},
-	{
-		path: 'home',
-		redirectTo: 'folder/inbox',
-		pathMatch: 'full'
-	},
-	{
-		path: 'folder/:id',
-		loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
 	},
 	{
 		path: 'login',
@@ -23,7 +14,12 @@ const routes: Routes = [
 	{
 		path: 'register',
 		loadChildren: () => import('./pages/register/register.module').then(m => m.RegistrationPageModule)
-	}
+	},
+	{
+		path: 'green-walks',
+		loadChildren: () => import('./pages/green-walks/green-walks.module').then(m => m.GreenWalksPageModule)
+	},
+	{ path: '**', redirectTo: 'green-walks' }
 ]
 
 @NgModule({
