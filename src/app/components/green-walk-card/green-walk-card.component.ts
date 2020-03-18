@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { GreenWalksLight } from '../../interfaces/green-walks-light'
+import { GreenWalksLight } from '../../interfaces/green-walk-light'
 
 @Component({
 	selector: 'app-green-walk-card',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { User } from '../../interfaces/user'
-import { AuthRequestService } from '../../requests/auth/auth-request.service'
+import { AuthRequestService } from '../../requests/auth-request.service'
 import { LocalService } from '../local/local.service'
 
 @Injectable({

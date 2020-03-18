@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular'
 import { GreenWalksPageRoutingModule } from './green-walks-routing.module'
 
 import { GreenWalksPage } from './green-walks.page'
+import { ComponentsModule } from '../../components/components.module'
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		IonicModule,
-		GreenWalksPageRoutingModule
+		GreenWalksPageRoutingModule,
+		ComponentsModule
 	],
 	declarations: [GreenWalksPage]
 })

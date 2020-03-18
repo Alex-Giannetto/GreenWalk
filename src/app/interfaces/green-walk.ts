@@ -1,13 +1,12 @@
-import { GreenWalksLight } from './green-walks-light'
+import { GreenWalkLight } from './green-walk-light'
 
-export interface GreenWalk extends GreenWalksLight {
+export interface GreenWalk extends GreenWalkLight {
 	description: string
 	location: {
 		longitude: number
 		latitude: number
 		postal: string
 		city: string
-		image: string
 	}
 	state: boolean
 	comments?: Comment[]

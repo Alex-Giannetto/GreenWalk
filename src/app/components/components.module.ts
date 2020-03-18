@@ -10,7 +10,9 @@ import { AvatarComponent } from './avatar/avatar.component'
 		CommonModule,
 		IonicModule,
 	],
-	exports: [],
+	exports: [
+		GreenWalkCardComponent
+	],
 	declarations: [
 		GreenWalkCardComponent,
 		ParticipantsComponent,

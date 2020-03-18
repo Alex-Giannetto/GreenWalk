@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed } from '@angular/core/testing'
 
 import { AuthService } from './auth.service'
-import { AuthRequestService } from '../../requests/auth/auth-request.service'
+import { AuthRequestService } from '../../requests/auth-request.service'
 import { defer, Observable } from 'rxjs'
 
 function fakeObservable<T> (data: T): Observable<T> {
