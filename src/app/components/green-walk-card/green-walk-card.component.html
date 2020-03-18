@@ -1,0 +1,10 @@
+<div class="card">
+    <header>
+        <div class="infos">
+            <ion-text class="location">{{greenWalk.name}}</ion-text>
+            <ion-text class="date">{{greenWalk.datetime}}</ion-text>
+        </div>
+        <app-participants [greenwalk]="greenWalk"></app-participants>
+    </header>
+    <img [src]="greenWalk.location.image" class="map">
+</div>
