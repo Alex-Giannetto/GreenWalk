@@ -13,8 +13,8 @@ export class GreenWalksPage {
 		name: 'Châtelet-les-Halles',
 		datetime: '2020-01-24 15:08:00',
 		location: {
-			longitude: 48.861591,
-			latitude: 2.349923,
+			latitude: 48.861591,
+			longitude: 2.349923,
 		},
 		author: {
 			firstName: 'Judith'

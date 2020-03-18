@@ -2,7 +2,7 @@
     <div class="participants">
         <app-participants [greenWalk]="greenWalk"></app-participants>
     </div>
-    <img src="https://bit.ly/2UgaGfZ"/>
+    <img [src]="mapService.getMap(greenWalk.location, {width: 400, height: 200})"/>
     <ion-card-header>
         <ion-card-subtitle>{{greenWalk.datetime}}</ion-card-subtitle>
         <ion-card-title>{{greenWalk.name}}</ion-card-title>
