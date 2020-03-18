@@ -1,3 +1,5 @@
+import { Person } from './person'
+
 export interface GreenWalksLight {
 	id: string
 	name: string
@@ -7,4 +9,6 @@ export interface GreenWalksLight {
 		longitude: number
 		image: string
 	}
+	author: Person
+	participant: Person[]
 }

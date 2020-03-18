@@ -4,7 +4,7 @@
             <ion-text class="location">{{greenWalk.name}}</ion-text>
             <ion-text class="date">{{greenWalk.datetime}}</ion-text>
         </div>
-        <app-participants [greenwalk]="greenWalk"></app-participants>
+        <app-participants [greenWalk]="greenWalk"></app-participants>
     </header>
-    <img [src]="greenWalk.location.image" class="map">
+    <img [src]="greenWalk.location.image" alt="Localisation de la sortie" class="map"/>
 </div>
