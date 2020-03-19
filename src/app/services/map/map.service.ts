@@ -11,6 +11,7 @@ export class MapService {
 	}
 
 	private getStyle (): string {
+		console.log('is dark ?', window.matchMedia('(prefers-color-scheme: dark)').matches)
 		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark-v10' : 'streets-v11'
 	}
 }

@@ -2,19 +2,22 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { IonicModule } from '@ionic/angular'
 
 import { ParticipantsComponent } from './participants.component'
+import { Component } from '@angular/core'
+import { GreenWalkLight, GreenWalkLightTestExample } from '../../interfaces/green-walk-light'
+import { AvatarComponent } from '../avatar/avatar.component'
 
 describe('ParticipantsComponent', () => {
 	let component: ParticipantsComponent
-	let fixture: ComponentFixture<ParticipantsComponent>
+	let fixture: ComponentFixture<TestHostComponent>
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ParticipantsComponent],
+			declarations: [TestHostComponent, ParticipantsComponent, AvatarComponent],
 			imports: [IonicModule.forRoot()]
 		}).compileComponents()
 
-		fixture = TestBed.createComponent(ParticipantsComponent)
-		component = fixture.componentInstance
+		fixture = TestBed.createComponent(TestHostComponent)
+		component = fixture.debugElement.children[0].componentInstance
 		fixture.detectChanges()
 	}))
 
@@ -22,3 +25,10 @@ describe('ParticipantsComponent', () => {
 		expect(component).toBeTruthy()
 	})
 })
+
+@Component({
+	template: '<app-participants [greenWalk]="greenWalk"></app-participants>'
+})
+class TestHostComponent {
+	private greenWalk: GreenWalkLight = GreenWalkLightTestExample
+}

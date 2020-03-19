@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { IonicModule } from '@ionic/angular'
 
 import { GreenWalksPage } from './green-walks.page'
+import { ComponentsModule } from '../../components/components.module'
 
 describe('GreenWalksPage', () => {
 	let component: GreenWalksPage
@@ -10,7 +11,7 @@ describe('GreenWalksPage', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [GreenWalksPage],
-			imports: [IonicModule.forRoot()]
+			imports: [IonicModule.forRoot(), ComponentsModule],
 		}).compileComponents()
 
 		fixture = TestBed.createComponent(GreenWalksPage)

@@ -1,23 +1,24 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { AvatarComponent } from './avatar.component'
+import { Person, PersonTestExample } from '../../interfaces/person'
+import { ComponentsModule } from '../components.module'
 
 describe('AvatarComponent', () => {
 	let component: AvatarComponent
-	let fixture: ComponentFixture<AvatarComponent>
+	let fixture: ComponentFixture<TestHostComponent>
 
-	beforeEach(async(() => {
+	beforeEach(async () => {
 		TestBed.configureTestingModule({
-			declarations: [AvatarComponent],
-			schemas: [CUSTOM_ELEMENTS_SCHEMA],
+			declarations: [TestHostComponent],
+			imports: [ComponentsModule],
+			schemas: [CUSTOM_ELEMENTS_SCHEMA]
 		})
 			.compileComponents()
-	}))
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(AvatarComponent)
-		component = fixture.componentInstance
+		fixture = TestBed.createComponent(TestHostComponent)
+		component = fixture.debugElement.children[0].componentInstance
 		fixture.detectChanges()
 	})
 
@@ -25,3 +26,10 @@ describe('AvatarComponent', () => {
 		expect(component).toBeTruthy()
 	})
 })
+
+@Component({
+	template: '<app-avatar [person]="person"></app-avatar>'
+})
+class TestHostComponent {
+	private person: Person = PersonTestExample
+}
