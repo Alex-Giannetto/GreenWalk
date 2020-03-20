@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { GreenWalkLight } from '../../interfaces/green-walk-light'
+import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
 import { MapService } from '../../services/map/map.service'
 
 @Component({
@@ -8,7 +8,7 @@ import { MapService } from '../../services/map/map.service'
 	styleUrls: ['./green-walk-card.component.scss'],
 })
 export class GreenWalkCardComponent {
-	@Input() greenWalk: GreenWalkLight
+	@Input() greenWalk: GreenWalkLightInterface
 
 	constructor (private mapService: MapService) {}
 }

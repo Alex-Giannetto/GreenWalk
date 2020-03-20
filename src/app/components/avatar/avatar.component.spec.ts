@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { AvatarComponent } from './avatar.component'
-import { Person, PersonTestExample } from '../../interfaces/person'
+import { PersonInterface, PersonTestExample } from '../../interfaces/person.interface'
 import { ComponentsModule } from '../components.module'
 
 describe('AvatarComponent', () => {
@@ -31,5 +31,5 @@ describe('AvatarComponent', () => {
 	template: '<app-avatar [person]="person"></app-avatar>'
 })
 class TestHostComponent {
-	private person: Person = PersonTestExample
+	private person: PersonInterface = PersonTestExample
 }

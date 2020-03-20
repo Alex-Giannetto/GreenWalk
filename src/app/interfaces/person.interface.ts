@@ -1,9 +1,9 @@
-export interface Person {
+export interface PersonInterface {
 	firstName: string
 	picture?: string
 }
 
-export const PersonTestExample: Person = {
+export const PersonTestExample: PersonInterface = {
 	firstName: 'firstName',
 	picture: 'picture'
 }

@@ -1,6 +1,6 @@
-import { GreenWalkLight, GreenWalkLightTestExample } from './green-walk-light'
+import { GreenWalkLightInterface, GreenWalkLightTestExample } from './green-walk-light.interface'
 
-export interface GreenWalk extends GreenWalkLight {
+export interface GreenWalkInterface extends GreenWalkLightInterface {
 	description: string
 	location: {
 		longitude: number
@@ -12,7 +12,7 @@ export interface GreenWalk extends GreenWalkLight {
 	comments?: Comment[]
 }
 
-export const GreenWalkTestExemple: GreenWalk = {
+export const GreenWalkTestExemple: GreenWalkInterface = {
 	...GreenWalkLightTestExample,
 	description: 'description',
 	location: {

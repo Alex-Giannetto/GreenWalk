@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { User } from '../../interfaces/user'
+import { UserInterface } from '../../interfaces/user.interface'
 
 export const LOCAL_STORAGE_USER = 'user'
 
@@ -8,9 +8,9 @@ export const LOCAL_STORAGE_USER = 'user'
 })
 export class LocalService {
 
-	static getUser (): User {
+	static getUser (): UserInterface {
 		const localData = localStorage.getItem(LOCAL_STORAGE_USER)
-		return localData ? JSON.parse(localData) as User : null
+		return localData ? JSON.parse(localData) as UserInterface : null
 	}
 
 	static getToken (): string {
@@ -18,7 +18,7 @@ export class LocalService {
 		return user ? user.token : null
 	}
 
-	static setUser (user: User): void {
+	static setUser (user: UserInterface): void {
 		localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(user))
 	}
 }

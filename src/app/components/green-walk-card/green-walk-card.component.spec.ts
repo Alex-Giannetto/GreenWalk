@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular'
 
 import { GreenWalkCardComponent } from './green-walk-card.component'
 import { Component } from '@angular/core'
-import { GreenWalkLight, GreenWalkLightTestExample } from '../../interfaces/green-walk-light'
+import { GreenWalkLightInterface, GreenWalkLightTestExample } from '../../interfaces/green-walk-light.interface'
 import { ComponentsModule } from '../components.module'
 
 describe('GreenWalkCardComponent', () => {
@@ -30,5 +30,5 @@ describe('GreenWalkCardComponent', () => {
 	template: '<app-green-walk-card [greenWalk]="greenWalk"></app-green-walk-card>'
 })
 class TestHostComponent {
-	private greenWalk: GreenWalkLight = GreenWalkLightTestExample
+	private greenWalk: GreenWalkLightInterface = GreenWalkLightTestExample
 }

@@ -1,30 +1,19 @@
-import { Component } from '@angular/core'
-import { GreenWalkLight } from '../../interfaces/green-walk-light'
+import { Component, OnInit } from '@angular/core'
+import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
+import { GreenWalkRequestService } from '../../requests/green-walk-request.service'
 
 @Component({
 	selector: 'app-green-walks',
 	templateUrl: './green-walks.page.html',
 	styleUrls: ['./green-walks.page.scss'],
 })
-export class GreenWalksPage {
+export class GreenWalksPage implements OnInit {
 
-	greenWalks: GreenWalkLight[] = [{
-		id: '1',
-		name: 'Châtelet-les-Halles',
-		datetime: '2020-01-24 15:08:00',
-		location: {
-			latitude: 48.861591,
-			longitude: 2.349923,
-		},
-		author: {
-			firstName: 'Judith'
-		},
-		participant: [
-			{ firstName: 'Benoit' },
-			{ firstName: 'Ilies' },
-			{ firstName: 'Théo' },
-			{ firstName: 'Elias' },
-		]
-	}]
+	greenWalks: GreenWalkLightInterface[] = []
 
+	constructor (private greenWalkRequestService: GreenWalkRequestService) {}
+
+	ngOnInit (): void {
+		this.greenWalkRequestService.getGreenWalks({ longitude: 0, latitude: 0 }, 0, 0)
+	}
 }

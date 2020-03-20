@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { GreenWalkLight } from '../../interfaces/green-walk-light'
+import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
 
 @Component({
 	selector: 'app-participants',
@@ -7,5 +7,5 @@ import { GreenWalkLight } from '../../interfaces/green-walk-light'
 	styleUrls: ['./participants.component.scss'],
 })
 export class ParticipantsComponent {
-	@Input() greenWalk: GreenWalkLight
+	@Input() greenWalk: GreenWalkLightInterface
 }

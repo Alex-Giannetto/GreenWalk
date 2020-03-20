@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { Person } from '../../interfaces/person'
+import { PersonInterface } from '../../interfaces/person.interface'
 
 @Component({
 	selector: 'app-avatar',
@@ -8,7 +8,7 @@ import { Person } from '../../interfaces/person'
 })
 export class AvatarComponent {
 
-	@Input() person: Person
+	@Input() person: PersonInterface
 	@Input() size: 'little' | 'big' | 'side-menu'
 	@Input() round: boolean
 	@Input() shadow: boolean

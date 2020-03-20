@@ -1,6 +1,6 @@
-import { Person, PersonTestExample } from './person'
+import { PersonInterface, PersonTestExample } from './person.interface'
 
-export interface GreenWalkLight {
+export interface GreenWalkLightInterface {
 	id: string
 	name: string
 	datetime: string
@@ -8,11 +8,11 @@ export interface GreenWalkLight {
 		latitude: number,
 		longitude: number,
 	}
-	author: Person
-	participant: Person[]
+	author: PersonInterface
+	participant: PersonInterface[]
 }
 
-export const GreenWalkLightTestExample: GreenWalkLight = {
+export const GreenWalkLightTestExample: GreenWalkLightInterface = {
 	id: 'id',
 	name: 'name',
 	datetime: '1970-01-01',
