@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
-    <name>GreenWalk</name>
-    <description>GreenWalk.</description>
-    <author email="contact@green-walk.fr" href="http://green-walk.fr/">GreenWalk Team</author>
+    <name>GreenWalkInterface</name>
+    <description>GreenWalkInterface.</description>
+    <author email="contact@green-walk.fr" href="http://green-walk.fr/">GreenWalkInterface Team</author>
     <content src="index.html"/>
     <access origin="*"/>
     <allow-intent href="http://*/*"/>

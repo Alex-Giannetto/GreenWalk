@@ -1,0 +1,13 @@
+ion-card {
+  margin: 0;
+
+  .participants {
+    background-color: env(--background);
+    border-radius: env(--border-radius);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+  }
+
+}

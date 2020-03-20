@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { User } from '../../interfaces/user'
-import { AuthRequestService } from '../../requests/auth/auth-request.service'
+import { UserInterface } from '../../interfaces/user.interface'
+import { AuthRequestService } from '../../requests/auth-request.service'
 import { LocalService } from '../local/local.service'
 
 @Injectable({
@@ -10,8 +10,8 @@ export class AuthService {
 
 	constructor (private authRequestService: AuthRequestService) { }
 
-	setUser (token: string): Promise<User> {
-		return new Promise<User>((resolve, reject) => {
+	setUser (token: string): Promise<UserInterface> {
+		return new Promise<UserInterface>((resolve, reject) => {
 			this.authRequestService.getUser(token).subscribe(data => {
 				if (!data.id) {
 					reject('Mauvais retours de l\'api')

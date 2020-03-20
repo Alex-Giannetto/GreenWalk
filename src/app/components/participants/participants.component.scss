@@ -1,0 +1,43 @@
+.people {
+  display: flex;
+
+  .number {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    align-items: center;
+    color: env(--ion-text-color);
+
+    .text {
+      font-size: 14px;
+      font-weight: bolder;
+
+      .plus {
+        font-size: 10px;
+      }
+    }
+
+    .rounds {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .round {
+        background-color: env(--ion-text-color);
+        margin: 0 1px;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        opacity: .7;
+
+        &:first-child {
+          opacity: .5;
+        }
+
+        &:last-child {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

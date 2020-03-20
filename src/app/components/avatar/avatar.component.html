@@ -1,0 +1,9 @@
+<div [ngClass]="{
+        round: round,
+        shadow: shadow,
+        big: size === 'big',
+        little: size === 'little',
+        'side-menu': size === 'side-menu'
+    }" class="avatar">
+    {{person.firstName|slice:0:1}}
+</div>
