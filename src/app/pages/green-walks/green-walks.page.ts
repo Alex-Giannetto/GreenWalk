@@ -9,11 +9,41 @@ import { GreenWalkRequestService } from '../../requests/green-walk-request.servi
 })
 export class GreenWalksPage implements OnInit {
 
+	state = {
+		loading: false
+	}
+
 	greenWalks: GreenWalkLightInterface[] = []
 
 	constructor (private greenWalkRequestService: GreenWalkRequestService) {}
 
-	ngOnInit (): void {
-		this.greenWalkRequestService.getGreenWalks({ longitude: 0, latitude: 0 }, 0, 0)
+	async ngOnInit () {
+		this.init()
+	}
+
+	async loadNextGreenWalks (event) {
+		await this.getGreenWalks()
+		event.target.complete()
+	}
+
+	async init (event = null) {
+		this.state.loading = true
+		await this.getGreenWalks()
+		this.state.loading = false
+
+		if (event) {
+			event.target.complete()
+		}
+	}
+
+	private getGreenWalks (): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+
+			this.greenWalkRequestService.getGreenWalks({ longitude: 0, latitude: 0 }, 0, 0)
+				.subscribe(greenWalks => {
+					this.greenWalks.push(...greenWalks)
+					resolve(true)
+				})
+		})
 	}
 }
