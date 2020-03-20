@@ -38,7 +38,6 @@ export class GreenWalksPage implements OnInit {
 
 	private getGreenWalks (): Promise<GreenWalkLightInterface[]> {
 		return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
-
 			this.greenWalkRequestService.getGreenWalks({ longitude: 0, latitude: 0 }, 0, 0)
 				.subscribe(greenWalks => {
 					resolve(greenWalks)
