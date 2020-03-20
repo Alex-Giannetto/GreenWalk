@@ -6,6 +6,8 @@ import { Component } from '@angular/core'
 import { GreenWalkLightInterface, GreenWalkLightTestExample } from '../../interfaces/green-walk-light.interface'
 import { AvatarComponent } from '../avatar/avatar.component'
 
+
+
 describe('ParticipantsComponent', () => {
 	let component: ParticipantsComponent
 	let fixture: ComponentFixture<TestHostComponent>

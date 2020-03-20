@@ -5,6 +5,13 @@ import { AvatarComponent } from './avatar.component'
 import { PersonInterface, PersonTestExample } from '../../interfaces/person.interface'
 import { ComponentsModule } from '../components.module'
 
+@Component({
+	template: '<app-avatar [person]="person"></app-avatar>'
+})
+class TestHostComponent {
+	private person: PersonInterface = PersonTestExample
+}
+
 describe('AvatarComponent', () => {
 	let component: AvatarComponent
 	let fixture: ComponentFixture<TestHostComponent>
@@ -27,9 +34,3 @@ describe('AvatarComponent', () => {
 	})
 })
 
-@Component({
-	template: '<app-avatar [person]="person"></app-avatar>'
-})
-class TestHostComponent {
-	private person: PersonInterface = PersonTestExample
-}

@@ -6,6 +6,13 @@ import { Component } from '@angular/core'
 import { GreenWalkLightInterface, GreenWalkLightTestExample } from '../../interfaces/green-walk-light.interface'
 import { ComponentsModule } from '../components.module'
 
+@Component({
+	template: '<app-green-walk-card [greenWalk]="greenWalk"></app-green-walk-card>'
+})
+class TestHostComponent {
+	private greenWalk: GreenWalkLightInterface = GreenWalkLightTestExample
+}
+
 describe('GreenWalkCardComponent', () => {
 	let component: GreenWalkCardComponent
 	let fixture: ComponentFixture<TestHostComponent>
@@ -26,9 +33,3 @@ describe('GreenWalkCardComponent', () => {
 	})
 })
 
-@Component({
-	template: '<app-green-walk-card [greenWalk]="greenWalk"></app-green-walk-card>'
-})
-class TestHostComponent {
-	private greenWalk: GreenWalkLightInterface = GreenWalkLightTestExample
-}
