@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true">
+<ion-content fullscreen="true" slot="fixed">
     <ion-refresher (ionRefresh)="init($event)" pullFactor="0.5" pullMax="200" pullMin="100" slot="fixed">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -18,7 +18,7 @@
     </ion-header>
     <ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
 
-    <div class="greenwalk-list" id="greenwalk-list">
+    <div class="greenWalks">
         <app-green-walk-card
             *ngFor="let greenWalk of greenWalks"
             [greenWalk]="greenWalk"
