@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
 import { GreenWalkRequestService } from '../../requests/green-walk-request.service'
+import { GeolocationService } from '../../services/geolocation/geolocation.service'
+import { ModalController } from '@ionic/angular'
 
 @Component({
 	selector: 'app-green-walks',
@@ -15,10 +17,20 @@ export class GreenWalksPage implements OnInit {
 
 	greenWalks: GreenWalkLightInterface[] = []
 
-	constructor (private greenWalkRequestService: GreenWalkRequestService) {}
+	constructor (
+		private greenWalkRequestService: GreenWalkRequestService,
+		private geolocationService: GeolocationService,
+		private modalController: ModalController
+	) {}
 
 	async ngOnInit () {
-		this.init()
+		this.state.loading = true
+		try {
+			const geolocation = await this.geolocationService.getLastLocation()
+			this.init()
+		} catch (e) {
+
+		}
 	}
 
 	async loadNextGreenWalks (event) {
