@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { Map, NavigationControl } from 'mapbox-gl'
+import { GeolocationService } from '../../services/geolocation/geolocation.service'
+import { ModalController } from '@ionic/angular'
 
 @Component({
 	selector: 'app-location-modal',
@@ -10,18 +12,17 @@ import { Map, NavigationControl } from 'mapbox-gl'
 export class LocationModalComponent implements OnInit {
 	map: Map
 
-	async ngOnInit () {
-		// const location = JSON.parse(localStorage.getItem('location'))
-		//
-		// if (!location.coordinates) {
-		// 	location.coordinates.longitude = 2
-		// 	location.coordinates.latitude = 48
-		// }
+	constructor (private geolocationService: GeolocationService, private modalController: ModalController) {}
 
-		const location = {
-			coordinates: {
-				latitude: 48,
-				longitude: 2
+	async ngOnInit () {
+		let location = JSON.parse(localStorage.getItem('location'))
+
+		if (!location) {
+			location = {
+				coordinates: {
+					longitude: 2.34265146041173,
+					latitude: 48.858369074442834
+				}
 			}
 		}
 
@@ -38,6 +39,13 @@ export class LocationModalComponent implements OnInit {
 		this.map.addControl(new NavigationControl())
 
 		setTimeout(() => this.map.resize(), 1)
+	}
+
+	async setLocationBtnClicked () {
+		const { lat: latitude, lng: longitude } = this.map.getCenter()
+		const coordinates = { latitude, longitude }
+		await this.geolocationService.setLocation(coordinates)
+		await this.modalController.dismiss()
 	}
 
 }
