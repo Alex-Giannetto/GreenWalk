@@ -4,6 +4,7 @@ import { GreenWalkCardComponent } from './green-walk-card/green-walk-card.compon
 import { IonicModule } from '@ionic/angular'
 import { ParticipantsComponent } from './participants/participants.component'
 import { AvatarComponent } from './avatar/avatar.component'
+import { LocationModalComponent } from './location-modal/location-modal.component'
 
 @NgModule({
 	imports: [
@@ -11,10 +12,12 @@ import { AvatarComponent } from './avatar/avatar.component'
 		IonicModule,
 	],
 	exports: [
-		GreenWalkCardComponent
+		GreenWalkCardComponent,
+		LocationModalComponent,
 	],
 	declarations: [
 		GreenWalkCardComponent,
+		LocationModalComponent,
 		ParticipantsComponent,
 		AvatarComponent
 	]

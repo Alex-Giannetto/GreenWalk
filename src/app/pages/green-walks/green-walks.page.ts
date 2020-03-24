@@ -3,6 +3,7 @@ import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.inter
 import { GreenWalkRequestService } from '../../requests/green-walk-request.service'
 import { GeolocationService } from '../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
+import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
 
 @Component({
 	selector: 'app-green-walks',
@@ -20,7 +21,7 @@ export class GreenWalksPage implements OnInit {
 	constructor (
 		private greenWalkRequestService: GreenWalkRequestService,
 		private geolocationService: GeolocationService,
-		private modalController: ModalController
+		private modalController: ModalController,
 	) {}
 
 	async ngOnInit () {
@@ -29,7 +30,10 @@ export class GreenWalksPage implements OnInit {
 			const geolocation = await this.geolocationService.getLastLocation()
 			this.init()
 		} catch (e) {
-
+			await (await this.modalController.create({
+				component: LocationModalComponent,
+				backdropDismiss: false
+			})).present()
 		}
 	}
 

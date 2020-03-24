@@ -1,0 +1,30 @@
+.map-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 55px;
+    transform: translateX(-50%) translateY(-100%);
+  }
+
+  .setLocation {
+    position: absolute;
+    bottom: 40px;
+    width: calc(100% - var(--ion-padding) * 2);
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
