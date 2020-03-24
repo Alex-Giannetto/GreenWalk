@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { GreenWalkLightInterface } from '../interfaces/green-walk-light.interface'
-import { LocationInterface } from '../interfaces/location.Interface'
+import { CoordinatesInterface } from '../interfaces/coordinates.Interface'
 import { GreenWalksFixtures } from '../fixtures/GreenWalksLight.fixture'
 
 @Injectable({
@@ -9,9 +9,7 @@ import { GreenWalksFixtures } from '../fixtures/GreenWalksLight.fixture'
 })
 export class GreenWalkRequest {
 
-	constructor () { }
-
-	getGreenWalks (location: LocationInterface, radius: number, page: number): Observable<GreenWalkLightInterface[]> {
+	getGreenWalks (location: CoordinatesInterface, radius: number, page: number): Observable<GreenWalkLightInterface[]> {
 		return new Observable<GreenWalkLightInterface[]>(observer => {
 			setTimeout(() => observer.next([...GreenWalksFixtures, ...GreenWalksFixtures]), 1000)
 		})
