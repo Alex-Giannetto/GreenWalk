@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed } from '@angular/core/testing'
 
 import { AuthService } from './auth.service'
-import { AuthRequestService } from '../../requests/auth-request.service'
+import { AuthRequest } from '../../requests/auth.request'
 import { defer, Observable } from 'rxjs'
 
 function fakeObservable<T> (data: T): Observable<T> {
@@ -20,7 +20,7 @@ describe('AuthService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
-				{ provide: AuthRequestService, useValue: authRequestServiceMock }
+				{ provide: AuthRequest, useValue: authRequestServiceMock }
 			]
 		})
 		service = TestBed.get(AuthService)

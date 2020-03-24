@@ -7,7 +7,7 @@ import { LocalService } from '../services/local/local.service'
 @Injectable({
 	providedIn: 'root'
 })
-export class RequestService {
+export class Request {
 
 	constructor (private httpClient: HttpClient) { }
 

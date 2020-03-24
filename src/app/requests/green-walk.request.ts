@@ -7,7 +7,7 @@ import { GreenWalksFixtures } from '../fixtures/GreenWalksLight.fixture'
 @Injectable({
 	providedIn: 'root'
 })
-export class GreenWalkRequestService {
+export class GreenWalkRequest {
 
 	constructor () { }
 

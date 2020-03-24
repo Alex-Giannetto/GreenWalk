@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { UserInterface } from '../../interfaces/user.interface'
-import { AuthRequestService } from '../../requests/auth-request.service'
+import { AuthRequest } from '../../requests/auth.request'
 import { LocalService } from '../local/local.service'
 
 @Injectable({
@@ -8,7 +8,7 @@ import { LocalService } from '../local/local.service'
 })
 export class AuthService {
 
-	constructor (private authRequestService: AuthRequestService) { }
+	constructor (private authRequestService: AuthRequest) { }
 
 	setUser (token: string): Promise<UserInterface> {
 		return new Promise<UserInterface>((resolve, reject) => {
