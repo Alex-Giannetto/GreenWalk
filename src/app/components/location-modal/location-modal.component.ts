@@ -3,6 +3,8 @@ import { environment } from '../../../environments/environment'
 import { Map, NavigationControl } from 'mapbox-gl'
 import { GeolocationService } from '../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
+import { CoordinatesTestExemple } from '../../interfaces/coordinates.Interface'
+import { LocationInterface } from '../../interfaces/location.interface'
 
 @Component({
 	selector: 'app-location-modal',
@@ -15,15 +17,10 @@ export class LocationModalComponent implements OnInit {
 	constructor (private geolocationService: GeolocationService, private modalController: ModalController) {}
 
 	async ngOnInit () {
-		let location = JSON.parse(localStorage.getItem('location'))
+		let location = JSON.parse(localStorage.getItem('location')) as LocationInterface
 
 		if (!location) {
-			location = {
-				coordinates: {
-					longitude: 2.34265146041173,
-					latitude: 48.858369074442834
-				}
-			}
+			location = { coordinates: CoordinatesTestExemple }
 		}
 
 		const style = true ? 'mapbox://styles/mapbox/streets-v11' : 'mapbox://styles/mapbox/dark-v10'

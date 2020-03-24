@@ -4,6 +4,6 @@ export interface CoordinatesInterface {
 }
 
 export const CoordinatesTestExemple: CoordinatesInterface = {
-	longitude: 2,
-	latitude: 49
+	longitude: 2.34265146041173,
+	latitude: 48.858369074442834
 }
