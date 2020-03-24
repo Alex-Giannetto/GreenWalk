@@ -28,6 +28,7 @@ export class GreenWalksPage implements OnInit {
 		this.state.loading = true
 		try {
 			const geolocation = await this.geolocationService.getLastLocation()
+			console.log(geolocation)
 			this.init()
 		} catch (e) {
 			await (await this.modalController.create({

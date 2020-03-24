@@ -22,7 +22,7 @@ export class Request {
 	}
 
 	getHeader (headers: { [key: string]: string }): { headers: HttpHeaders } {
-		const token = LocalService.getToken()
+		const token = LocalService.token
 
 		const xAuthTokenHeader = token ? {
 			'X-AUTH-TOKEN': token,

@@ -69,6 +69,6 @@ export class AppComponent implements OnInit {
 	}
 
 	isLogged (): boolean {
-		return !!LocalService.getUser()
+		return !!LocalService.user
 	}
 }

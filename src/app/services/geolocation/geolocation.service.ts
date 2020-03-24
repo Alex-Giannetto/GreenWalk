@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { CoordinatesInterface } from '../../interfaces/coordinates.Interface'
 import { LocationRequest } from '../../requests/location.request'
+import { LocationInterface } from '../../interfaces/location.interface'
+import { LocalService } from '../local/local.service'
 
 @Injectable({
 	providedIn: 'root'
@@ -10,15 +12,14 @@ export class GeolocationService {
 
 	constructor (private geolocation: Geolocation, private locationRequest: LocationRequest) { }
 
-	getLastLocation () {
+	getLastLocation (): Promise<LocationInterface> {
+		if (LocalService.location) { return Promise.resolve(LocalService.location) }
+
 		const config = { timeout: 5 * 1000, maximumAge: 5 * 60 * 1000 }
 
-		return new Promise<CoordinatesInterface>((resolve, reject) => {
-			this.geolocation.getCurrentPosition(config).then(geoPosition => {
-				const { latitude, longitude } = geoPosition.coords
-				resolve({ latitude, longitude })
-			}).catch(e => reject(e))
-		})
+		return this.geolocation.getCurrentPosition(config)
+			.then(geoPosition => Promise.resolve({ coordinates: geoPosition.coords }))
+			.catch(e => Promise.reject(e))
 	}
 
 	async getAddressInfoFormCoordinate (coordinates: CoordinatesInterface): Promise<string> {

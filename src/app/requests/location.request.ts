@@ -13,7 +13,9 @@ export class LocationRequest {
 
 	getAddressFromCoordinate (coordinates: CoordinatesInterface): Observable<any> {
 		return this.requestService.get(
-			`https://api.mapbox.com/geocoding/v5/mapbox.places/${coordinates.longitude},${coordinates.latitude}.json?types=address&access_token=${environment.mapBox.token}`,
+			'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
+			coordinates.longitude + ',' + coordinates.latitude + '.json?types=address&' +
+			'access_token=' + environment.mapBox.token,
 			null,
 			false
 		)

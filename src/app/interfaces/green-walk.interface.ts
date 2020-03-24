@@ -1,26 +1,16 @@
 import { GreenWalkLightInterface, GreenWalkLightTestExample } from './green-walk-light.interface'
+import { LocationTestExample } from './location.interface'
 
 export interface GreenWalkInterface extends GreenWalkLightInterface {
 	description: string
-	location: {
-		longitude: number
-		latitude: number
-		postal: string
-		city: string
-	}
 	state: boolean
 	comments?: Comment[]
 }
 
-export const GreenWalkTestExemple: GreenWalkInterface = {
+export const GreenWalkTestExample: GreenWalkInterface = {
 	...GreenWalkLightTestExample,
 	description: 'description',
-	location: {
-		longitude: 0,
-		latitude: 0,
-		postal: 'postal',
-		city: 'city'
-	},
+	location: LocationTestExample,
 	state: true,
 	comments: []
 }
