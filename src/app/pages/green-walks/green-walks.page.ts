@@ -4,6 +4,7 @@ import { GreenWalkRequest } from '../../requests/green-walk.request'
 import { GeolocationService } from '../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
 import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
+import { LocalService } from '../../services/local/local.service'
 
 @Component({
 	selector: 'app-green-walks',
@@ -27,15 +28,23 @@ export class GreenWalksPage implements OnInit {
 	async ngOnInit () {
 		this.state.loading = true
 		try {
-			const geolocation = await this.geolocationService.getLastLocation()
-			console.log(geolocation)
+			await this.geolocationService.getLastLocation()
 			this.init()
+
 		} catch (e) {
-			await (await this.modalController.create({
-				component: LocationModalComponent,
-				backdropDismiss: false
-			})).present()
+			this.chooseLocation()
 		}
+	}
+
+	async chooseLocation () {
+		const modal = await this.modalController.create({
+			component: LocationModalComponent,
+			backdropDismiss: false
+		})
+		await modal.present()
+		await modal.onWillDismiss()
+
+		this.init()
 	}
 
 	async loadNextGreenWalks (event) {
@@ -55,10 +64,10 @@ export class GreenWalksPage implements OnInit {
 
 	private getGreenWalks (): Promise<GreenWalkLightInterface[]> {
 		return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
-			this.greenWalkRequestService.getGreenWalks({ longitude: 0, latitude: 0 }, 0, 0)
-				.subscribe(greenWalks => {
-					resolve(greenWalks)
-				}, error => reject(error))
+
+			this.greenWalkRequestService.getGreenWalks(LocalService.location.coordinates, 0, 0)
+				.subscribe(greenWalks => resolve(greenWalks), error => reject(error))
+
 		})
 	}
 }
