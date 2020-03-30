@@ -3,9 +3,15 @@ import { IonicModule, ModalController } from '@ionic/angular'
 
 import { LocationModalComponent } from './location-modal.component'
 import { GeolocationService } from '../../services/geolocation/geolocation.service'
+import {Observable} from 'rxjs'
 
 const Mock = {
 	geolocationService: () => {}
+}
+
+const SpiedObject = {
+	ModalController: null,
+	Map: null
 }
 
 describe('LocationModalComponent', () => {
@@ -24,6 +30,7 @@ describe('LocationModalComponent', () => {
 
 		fixture = TestBed.createComponent(LocationModalComponent)
 		component = fixture.componentInstance
+
 		fixture.detectChanges()
 	}))
 
