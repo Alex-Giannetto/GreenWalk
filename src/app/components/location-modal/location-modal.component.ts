@@ -23,7 +23,8 @@ export class LocationModalComponent implements OnInit {
 			location = { coordinates: CoordinatesTestExemple }
 		}
 
-		const style = true ? 'mapbox://styles/mapbox/streets-v11' : 'mapbox://styles/mapbox/dark-v10'
+		// const style = true ? 'mapbox://styles/mapbox/streets-v11' : 'mapbox://styles/mapbox/dark-v10'
+		const style = 'mapbox://styles/mapbox/streets-v11'
 
 		this.map = new Map({
 			accessToken: environment.mapBox.token,

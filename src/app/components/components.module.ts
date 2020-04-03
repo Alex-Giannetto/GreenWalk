@@ -17,9 +17,10 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
 	],
 	declarations: [
 		GreenWalkCardComponent,
-		LocationModalComponent,
 		ParticipantsComponent,
-		AvatarComponent
+		AvatarComponent,
+		LocationModalComponent
 	]
+
 })
 export class ComponentsModule {}

@@ -15,7 +15,7 @@ export class GeolocationService {
 	getLastLocation (): Promise<LocationInterface> {
 		if (LocalService.location) { return Promise.resolve(LocalService.location) }
 
-		const config = { timeout: 5 * 1000, maximumAge: 5 * 60 * 1000 }
+		const config = { timeout: 5_000, maximumAge: 300_000 }
 
 		return this.geolocation.getCurrentPosition(config)
 			.then(geoPosition => Promise.resolve({ coordinates: geoPosition.coords }))

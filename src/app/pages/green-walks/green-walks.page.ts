@@ -4,6 +4,7 @@ import { GreenWalkRequest } from '../../requests/green-walk.request'
 import { GeolocationService } from '../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
 import { LocalService } from '../../services/local/local.service'
+import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
 
 @Component({
 	selector: 'app-green-walks',
@@ -37,7 +38,7 @@ export class GreenWalksPage implements OnInit {
 
 	async chooseLocation () {
 		const modal = await this.modalController.create({
-			component: 'LocationModalComponent',
+			component: LocationModalComponent,
 			backdropDismiss: false
 		})
 		await modal.present()
