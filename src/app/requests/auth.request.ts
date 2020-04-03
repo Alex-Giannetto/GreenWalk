@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
-import { RequestService } from './request.service'
+import { Request } from './request'
 import { Observable } from 'rxjs'
 
 @Injectable({
 	providedIn: 'root'
 })
-export class AuthRequestService {
+export class AuthRequest {
 
-	constructor (private requestService: RequestService) { }
+	constructor (private requestService: Request) { }
 
 	signIn (email: string, password: string): Observable<any> {
 		return this.requestService.post('auth/signin', { email, password })

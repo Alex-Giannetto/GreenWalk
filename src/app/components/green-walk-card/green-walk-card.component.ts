@@ -10,5 +10,5 @@ import { MapService } from '../../services/map/map.service'
 export class GreenWalkCardComponent {
 	@Input() greenWalk: GreenWalkLightInterface
 
-	constructor (private mapService: MapService) {}
+	constructor (public mapService: MapService) {}
 }

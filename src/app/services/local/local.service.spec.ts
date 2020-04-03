@@ -12,11 +12,11 @@ describe('LocalService', () => {
 
 	it('should not have user', () => {
 		localStorage.clear()
-		expect(LocalService.getUser()).toBeFalsy()
+		expect(LocalService.user).toBeFalsy()
 	})
 
 	it('should not have token', () => {
 		localStorage.clear()
-		expect(LocalService.getToken()).toBeFalsy()
+		expect(LocalService.token).toBeFalsy()
 	})
 })

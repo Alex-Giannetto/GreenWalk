@@ -7,7 +7,7 @@ import { LocalService } from '../services/local/local.service'
 @Injectable({
 	providedIn: 'root'
 })
-export class RequestService {
+export class Request {
 
 	constructor (private httpClient: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class RequestService {
 	}
 
 	getHeader (headers: { [key: string]: string }): { headers: HttpHeaders } {
-		const token = LocalService.getToken()
+		const token = LocalService.token
 
 		const xAuthTokenHeader = token ? {
 			'X-AUTH-TOKEN': token,

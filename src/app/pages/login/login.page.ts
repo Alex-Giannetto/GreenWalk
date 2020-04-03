@@ -37,6 +37,8 @@ export class LoginPage implements OnInit {
 	async onSubmit () {
 		const { email, password } = this.formGroup.value
 
+
+
 		const loading = await this.loadingController.create({
 			message: 'Chargement…'
 		})

@@ -8,6 +8,7 @@ import { GreenWalksPageRoutingModule } from './green-walks-routing.module'
 
 import { GreenWalksPage } from './green-walks.page'
 import { ComponentsModule } from '../../components/components.module'
+import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
 
 @NgModule({
 	imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from '../../components/components.module'
 		GreenWalksPageRoutingModule,
 		ComponentsModule
 	],
-	declarations: [GreenWalksPage]
+	declarations: [GreenWalksPage],
+	entryComponents: [LocationModalComponent],
 })
 export class GreenWalksPageModule {}

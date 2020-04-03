@@ -1,8 +1,8 @@
 .greenWalks {
-  padding: env(--ion-padding);
+  padding: var(--ion-padding);
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: env(--ion-padding);
+  grid-gap: var(--ion-padding);
 
   @media screen and (min-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
