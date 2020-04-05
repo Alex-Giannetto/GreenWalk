@@ -11,11 +11,9 @@ import { AppRoutingModule } from './app-routing.module'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { ComponentsModule } from './components/components.module'
-import { SafePipe } from './pipes/safe/safe.pipe'
-import { Nl2brPipe } from './pipes/nl2br/nl2br.pipe'
 
 @NgModule({
-	declarations: [AppComponent, SafePipe, Nl2brPipe],
+	declarations: [AppComponent],
 	entryComponents: [],
 	imports: [
 		BrowserModule,
@@ -30,10 +28,6 @@ import { Nl2brPipe } from './pipes/nl2br/nl2br.pipe'
 		HttpClient,
 		Geolocation,
 		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-	],
-	exports: [
-		SafePipe,
-		Nl2brPipe,
 	],
 	bootstrap: [AppComponent],
 })

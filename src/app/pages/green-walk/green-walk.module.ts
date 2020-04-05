@@ -8,7 +8,7 @@ import { GreenWalkPageRoutingModule } from './green-walk-routing.module'
 
 import { GreenWalkPage } from './green-walk.page'
 import { ComponentsModule } from '../../components/components.module'
-import { AppModule } from '../../app.module'
+import { PipesModule } from '../../pipes/pipes.module'
 
 @NgModule({
 	imports: [
@@ -17,7 +17,7 @@ import { AppModule } from '../../app.module'
 		IonicModule,
 		GreenWalkPageRoutingModule,
 		ComponentsModule,
-		AppModule,
+		PipesModule,
 	],
 	declarations: [GreenWalkPage],
 })

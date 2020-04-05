@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" id="page">
     <ion-header>
-        <img *ngIf="map" [src]="map|safe:'url'" id="map">
+<!--        <img [src]="getMap()|safe:'url'" id="map">-->
     </ion-header>
 
     <ion-content (scroll)="onScroll($event)" [fullscreen]="true" id="content">
@@ -17,7 +17,7 @@
                         <div class="location">
                             <ion-icon name="pin"></ion-icon>
                             <div *ngIf="greenWalk" class="text">
-                                {{greenWalk.location.city + ' ' + greenWalk.location.zipCode}}
+                                {{greenWalk.location.city + ' ' + greenWalk.location.postal}}
                             </div>
                         </div>
 

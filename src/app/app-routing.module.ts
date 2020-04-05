@@ -18,16 +18,18 @@ const routes: Routes = [
 			m => m.RegistrationPageModule),
 	},
 	{
+		path: 'green-walks/:id',
+		loadChildren: () => import('./pages/green-walk/green-walk.module').then(m => m.GreenWalkPageModule),
+	},
+	{
 		path: 'green-walks',
 		loadChildren: () => import('./pages/green-walks/green-walks.module').then(
 			m => m.GreenWalksPageModule),
 	},
 	{
-		path: 'green-walks/:id',
-		loadChildren: () => import('./pages/green-walk/green-walk.module').then(
-			m => m.GreenWalkPageModule),
+		path: '**',
+		redirectTo: 'green-walks',
 	},
-	{ path: '**', redirectTo: 'green-walks' },
 
 ]
 
