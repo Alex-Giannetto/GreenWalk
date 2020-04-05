@@ -14,6 +14,7 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
 	exports: [
 		GreenWalkCardComponent,
 		LocationModalComponent,
+		ParticipantsComponent,
 	],
 	declarations: [
 		GreenWalkCardComponent,

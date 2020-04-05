@@ -11,9 +11,10 @@ import { AppRoutingModule } from './app-routing.module'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { ComponentsModule } from './components/components.module'
+import { SafePipe } from './pipes/safe/safe.pipe'
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, SafePipe],
 	entryComponents: [],
 	imports: [
 		BrowserModule,
@@ -27,8 +28,11 @@ import { ComponentsModule } from './components/components.module'
 		SplashScreen,
 		HttpClient,
 		Geolocation,
-		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 	],
-	bootstrap: [AppComponent]
+	exports: [
+		SafePipe,
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
