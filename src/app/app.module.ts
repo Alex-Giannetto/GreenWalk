@@ -12,9 +12,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { ComponentsModule } from './components/components.module'
 import { SafePipe } from './pipes/safe/safe.pipe'
+import { Nl2brPipe } from './pipes/nl2br/nl2br.pipe'
 
 @NgModule({
-	declarations: [AppComponent, SafePipe],
+	declarations: [AppComponent, SafePipe, Nl2brPipe],
 	entryComponents: [],
 	imports: [
 		BrowserModule,
@@ -32,6 +33,7 @@ import { SafePipe } from './pipes/safe/safe.pipe'
 	],
 	exports: [
 		SafePipe,
+		Nl2brPipe,
 	],
 	bootstrap: [AppComponent],
 })
