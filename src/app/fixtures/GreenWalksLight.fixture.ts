@@ -1,11 +1,13 @@
-import { GreenWalkLightInterface } from '../interfaces/green-walk-light.interface'
+import { GreenWalkInterface } from '../interfaces/green-walk.interface'
+import { LocationTestExample } from '../interfaces/location.interface'
 
-export const GreenWalksFixtures: GreenWalkLightInterface[] = [
+export const GreenWalksFixtures: GreenWalkInterface[] = [
 	{
 		id: '1',
 		name: 'Châtelet-les-Halles',
 		datetime: '2020-04-01 15:08:00',
 		location: {
+			...LocationTestExample,
 			coordinates: {
 				latitude: 48.861591,
 				longitude: 2.349923,
@@ -20,11 +22,15 @@ export const GreenWalksFixtures: GreenWalkLightInterface[] = [
 			{ firstName: 'Théo' },
 			{ firstName: 'Elias' },
 		],
+		description: 'lorem...',
+		state: true,
+		comments: []
 	}, {
-		id: '1',
+		id: '2',
 		name: 'Nation',
 		datetime: '2020-04-12 15:08:00',
 		location: {
+			...LocationTestExample,
 			coordinates: {
 				latitude: 48.848384,
 				longitude: 2.395905,
@@ -39,11 +45,15 @@ export const GreenWalksFixtures: GreenWalkLightInterface[] = [
 			{ firstName: 'Paul' },
 			{ firstName: 'Antoine' },
 		],
+		description: 'lorem...',
+		state: true,
+		comments: []
 	}, {
-		id: '1',
+		id: '3',
 		name: 'Buttes de Chaumont',
 		datetime: '2020-04-12 15:08:00',
 		location: {
+			...LocationTestExample,
 			coordinates: {
 				latitude: 48.880627,
 				longitude: 2.383256,
@@ -58,5 +68,8 @@ export const GreenWalksFixtures: GreenWalkLightInterface[] = [
 			{ firstName: 'Paul' },
 			{ firstName: 'Antoine' },
 		],
+		description: 'lorem...',
+		state: true,
+		comments: []
 	},
 ]

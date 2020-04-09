@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { GreenWalkInterface, GreenWalkTestExample } from '../../interfaces/green-walk.interface'
+import { GreenWalkInterface } from '../../interfaces/green-walk.interface'
 import { MapService } from '../../services/map/map.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LoadingController, NavController, Platform } from '@ionic/angular'
+import { GreenWalkRequest } from '../../requests/green-walk.request'
 
 @Component({
 	selector: 'app-green-walk',
@@ -11,7 +12,7 @@ import { LoadingController, NavController, Platform } from '@ionic/angular'
 })
 export class GreenWalkPage implements OnInit {
 
-	greenWalk: GreenWalkInterface = GreenWalkTestExample
+	greenWalk: GreenWalkInterface
 	map: string
 
 	constructor (
@@ -20,26 +21,31 @@ export class GreenWalkPage implements OnInit {
 		private router: Router,
 		private loadingController: LoadingController,
 		private platform: Platform,
-		private navController: NavController
-		) { }
+		private navController: NavController,
+		private greenWalkRequest: GreenWalkRequest,
+	) { }
 
-	async ngOnInit() {
+	async ngOnInit () {
 		const loading = await this.loadingController.create({
 			spinner: 'circular',
 			message: 'Veuillez patienter...',
 			keyboardClose: true,
-			cssClass: ['loadingController']
+			cssClass: ['loadingController'],
 		})
 		await loading.present()
 
-		try {
-			const id = this.activatedRoute.snapshot.paramMap.get('id')
-			this.greenWalk = await this.greenWalkService.get(id)
-		} catch (e) {
-			this.router.navigate(['/']).then()
-		} finally {
-			await loading.dismiss()
-		}
+		const id = this.activatedRoute.snapshot.paramMap.get('id')
+
+		this.greenWalkRequest.getOneById(id).subscribe(
+			greenWalk => {
+				this.greenWalk = greenWalk
+				loading.dismiss().then()
+			},
+			() => {
+				this.router.navigate(['/']).then()
+				loading.dismiss().then()
+			},
+		)
 	}
 
 	getMap (): string {
