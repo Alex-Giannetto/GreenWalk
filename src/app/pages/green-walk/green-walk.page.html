@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" id="page">
     <ion-header>
-<!--        <img [src]="getMap()|safe:'url'" id="map">-->
+        <img [src]="getMap()|safe:'url'" id="map">
     </ion-header>
 
     <ion-content (scroll)="onScroll($event)" [fullscreen]="true" id="content">
@@ -17,19 +17,19 @@
                         <div class="location">
                             <ion-icon name="pin"></ion-icon>
                             <div *ngIf="greenWalk" class="text">
-                                {{greenWalk.location.city + ' ' + greenWalk.location.postal}}
+                                {{greenWalk.location.city + ' ' + greenWalk.location.zipCode}}
                             </div>
                         </div>
 
                         <app-participants *ngIf="greenWalk" [greenWalk]="greenWalk"></app-participants>
                     </div>
 
-                    <button class="btn background--primary btn--participate">Participer</button>
+                    <button class="btn btn--participate">Participer</button>
                 </header>
 
                 <p *ngIf="greenWalk" [innerHTML]="greenWalk.description | nl2br"
                    class="description ion-padding-horizontal"></p>
-<!--                <app-comments *ngIf="greenWalk" [comments]="greenWalk.comments"></app-comments>-->
+                <!--                <app-comments *ngIf="greenWalk" [comments]="greenWalk.comments"></app-comments>-->
             </div>
         </div>
     </ion-content>
