@@ -27,6 +27,7 @@
         <app-green-walk-card
             *ngFor="let greenWalk of greenWalks"
             [greenWalk]="greenWalk"
+            [routerLink]="greenWalk.id"
         ></app-green-walk-card>
     </div>
 
