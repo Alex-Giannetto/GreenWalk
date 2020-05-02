@@ -13,6 +13,7 @@ import { GreenWalkRequest } from '../../requests/green-walk.request'
 export class GreenWalkPage implements OnInit {
 
 	greenWalk: GreenWalkInterface
+	scroll: number = 0
 	map: string
 
 	constructor (
@@ -65,4 +66,8 @@ export class GreenWalkPage implements OnInit {
 		return this.map
 	}
 
+	onScroll (event) {
+		this.scroll = event.target.scrollTop
+		console.log(event.target.scrollTop)
+	}
 }
