@@ -32,6 +32,7 @@ export class GreenWalksPage implements OnInit {
 			this.init()
 
 		} catch (e) {
+			console.error(e)
 			this.chooseLocation()
 		}
 	}

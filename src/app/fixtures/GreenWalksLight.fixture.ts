@@ -22,9 +22,11 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 			{ firstName: 'Théo' },
 			{ firstName: 'Elias' },
 		],
-		description: 'lorem...',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, adipisci assumenda atque aut ' +
+			'corporis cum earum esse expedita mollitia necessitatibus, neque, saepe sed suscipit. Animi exercitationem ' +
+			'expedita officiis. Qui, velit!',
 		state: true,
-		comments: []
+		comments: [],
 	}, {
 		id: '2',
 		name: 'Nation',
@@ -47,7 +49,7 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 		],
 		description: 'lorem...',
 		state: true,
-		comments: []
+		comments: [],
 	}, {
 		id: '3',
 		name: 'Buttes de Chaumont',
@@ -70,6 +72,6 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 		],
 		description: 'lorem...',
 		state: true,
-		comments: []
+		comments: [],
 	},
 ]

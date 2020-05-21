@@ -2,7 +2,7 @@ import { GreenWalkLightInterface, GreenWalkLightTestExample } from './green-walk
 import { LocationTestExample } from './location.interface'
 
 export interface GreenWalkInterface extends GreenWalkLightInterface {
-	description: string
+	description?: string
 	state: boolean
 	comments?: Comment[]
 }

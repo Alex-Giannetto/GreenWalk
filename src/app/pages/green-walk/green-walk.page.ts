@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { GreenWalkInterface } from '../../interfaces/green-walk.interface'
 import { MapService } from '../../services/map/map.service'
-import { ActivatedRoute, Router } from '@angular/router'
-import { LoadingController, NavController, Platform } from '@ionic/angular'
+import { ActivatedRoute } from '@angular/router'
+import { LoadingController, MenuController, NavController, Platform } from '@ionic/angular'
 import { GreenWalkRequest } from '../../requests/green-walk.request'
 
 @Component({
@@ -13,40 +13,39 @@ import { GreenWalkRequest } from '../../requests/green-walk.request'
 export class GreenWalkPage implements OnInit {
 
 	greenWalk: GreenWalkInterface
-	scroll: number = 0
-	map: string
+
+	map = {
+		url: null,
+		loaded: false,
+	}
 
 	constructor (
 		private mapService: MapService,
 		private activatedRoute: ActivatedRoute,
-		private router: Router,
 		private loadingController: LoadingController,
 		private platform: Platform,
 		private navController: NavController,
 		private greenWalkRequest: GreenWalkRequest,
+		private menuController: MenuController,
 	) { }
 
 	async ngOnInit () {
-		const loading = await this.loadingController.create({
-			spinner: 'circular',
-			message: 'Veuillez patienter...',
-			keyboardClose: true,
-			cssClass: ['loadingController'],
-		})
-		await loading.present()
+		await this.menuController.enable(false)
 
 		const id = this.activatedRoute.snapshot.paramMap.get('id')
 
 		this.greenWalkRequest.getOneById(id).subscribe(
 			greenWalk => {
 				this.greenWalk = greenWalk
-				loading.dismiss().then()
 			},
 			() => {
-				this.router.navigate(['/']).then()
-				loading.dismiss().then()
+				this.navController.navigateRoot(['/'])
 			},
 		)
+	}
+
+	async ionViewWillLeave () {
+		await this.menuController.enable(true)
 	}
 
 	getMap (): string {
@@ -56,18 +55,32 @@ export class GreenWalkPage implements OnInit {
 
 		const element = document.getElementById('map')
 
-		if ((element.offsetWidth || element.offsetHeight) === 0) {
+		if (element.offsetWidth === 0 || element.offsetHeight === 0) {
 			return ''
 		}
 
 		const width = element.offsetWidth > 0 && element.offsetWidth < 1280 ? element.offsetWidth : 1280
 		const height = element.offsetHeight > 0 && element.offsetHeight < 1280 ? element.offsetHeight : 1280
-		this.map = this.mapService.getMap(this.greenWalk.location.coordinates, { width, height })
-		return this.map
+		this.map.url = this.mapService.getMap(this.greenWalk.location.coordinates, { width, height, zoom: 13 })
+		return this.map.url
 	}
 
-	onScroll (event) {
-		this.scroll = event.target.scrollTop
-		console.log(event.target.scrollTop)
+	mapIsLoaded () {
+		this.map.loaded = true
 	}
+
+	back () {
+		this.navController.back()
+	}
+
+	openMapsApp () {
+		if (this.platform.is('android')) {
+			window.location.href = 'geo:' + this.greenWalk.location.coordinates.latitude + ',' +
+				this.greenWalk.location.coordinates.longitude
+		} else {
+			window.location.href = 'maps://maps.apple.com/?q=' + this.greenWalk.location.coordinates.latitude + ',' +
+				this.greenWalk.location.coordinates.longitude
+		}
+	}
+
 }
