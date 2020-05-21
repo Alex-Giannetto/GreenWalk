@@ -27,8 +27,8 @@ import { ComponentsModule } from './components/components.module'
 		SplashScreen,
 		HttpClient,
 		Geolocation,
-		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

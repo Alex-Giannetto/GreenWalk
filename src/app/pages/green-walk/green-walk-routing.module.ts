@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { GreenWalksPage } from './green-walks.page'
+import { GreenWalkPage } from './green-walk.page'
 
 const routes: Routes = [
 	{
 		path: '',
-		component: GreenWalksPage
-	}
+		component: GreenWalkPage,
+	},
 ]
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule],
 })
-export class GreenWalksPageRoutingModule {}
+export class GreenWalkPageRoutingModule {}

@@ -5,27 +5,38 @@ const routes: Routes = [
 	{
 		path: '',
 		redirectTo: 'green-walks',
-		pathMatch: 'full'
+		pathMatch: 'full',
 	},
 	{
 		path: 'login',
-		loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+		loadChildren: () => import('./pages/login/login.module').then(
+			m => m.LoginPageModule),
 	},
 	{
 		path: 'register',
-		loadChildren: () => import('./pages/register/register.module').then(m => m.RegistrationPageModule)
+		loadChildren: () => import('./pages/register/register.module').then(
+			m => m.RegistrationPageModule),
+	},
+	{
+		path: 'green-walks/:id',
+		loadChildren: () => import('./pages/green-walk/green-walk.module').then(m => m.GreenWalkPageModule),
 	},
 	{
 		path: 'green-walks',
-		loadChildren: () => import('./pages/green-walks/green-walks.module').then(m => m.GreenWalksPageModule)
+		loadChildren: () => import('./pages/green-walks/green-walks.module').then(
+			m => m.GreenWalksPageModule),
 	},
-	{ path: '**', redirectTo: 'green-walks' }
+	{
+		path: '**',
+		redirectTo: 'green-walks',
+	},
+
 ]
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+		RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 	],
-	exports: [RouterModule]
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}

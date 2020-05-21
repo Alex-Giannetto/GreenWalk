@@ -4,6 +4,6 @@ export const environment = {
 		url: 'http://preprod.api.green-walk.fr/api/'
 	},
 	mapBox: {
-		token: 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg'
+		token: 'pk.eyJ1IjoiYWxleGc3OGJpcyIsImEiOiJjazEzZXR2MGQwN2FqM2NtOTk1bjJ2N3ZlIn0.ot8SN9Ue3V-Lmx_hw5gpog'
 	}
 }

@@ -1,11 +1,11 @@
 <ion-header translucent="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+            <ion-menu-button color="dark"></ion-menu-button>
         </ion-buttons>
         <ion-title>Les sorties</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="chooseLocation()">
+            <ion-button (click)="chooseLocation()" color="dark">
                 <ion-icon slot="icon-only" name="location-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -27,6 +27,7 @@
         <app-green-walk-card
             *ngFor="let greenWalk of greenWalks"
             [greenWalk]="greenWalk"
+            [routerLink]="greenWalk.id"
         ></app-green-walk-card>
     </div>
 

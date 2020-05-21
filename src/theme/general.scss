@@ -24,3 +24,9 @@
 .ios .header-collapse-condense ion-toolbar {
   --background: var(--ion-background-color, #fff);
 }
+
+
+ion-skeleton-text{
+  border-radius: 0;
+  height: 15px;
+}
