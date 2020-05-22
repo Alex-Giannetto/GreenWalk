@@ -9,28 +9,20 @@ const routes: Routes = [
 	},
 	{
 		path: 'login',
-		loadChildren: () => import('./pages/login/login.module').then(
-			m => m.LoginPageModule),
+		loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
 	},
 	{
 		path: 'register',
-		loadChildren: () => import('./pages/register/register.module').then(
-			m => m.RegistrationPageModule),
-	},
-	{
-		path: 'green-walks/:id',
-		loadChildren: () => import('./pages/green-walk/green-walk.module').then(m => m.GreenWalkPageModule),
+		loadChildren: () => import('./pages/register/register.module').then(m => m.RegistrationPageModule),
 	},
 	{
 		path: 'green-walks',
-		loadChildren: () => import('./pages/green-walks/green-walks.module').then(
-			m => m.GreenWalksPageModule),
+		loadChildren: './pages/GreenWalk/green-walk.module#GreenWalkModule',
 	},
 	{
 		path: '**',
 		redirectTo: 'green-walks',
 	},
-
 ]
 
 @NgModule({

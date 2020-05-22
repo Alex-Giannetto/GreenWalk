@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { GreenWalkInterface } from '../../interfaces/green-walk.interface'
-import { MapService } from '../../services/map/map.service'
+import { GreenWalkInterface } from '../../../interfaces/green-walk.interface'
+import { MapService } from '../../../services/map/map.service'
 import { ActivatedRoute } from '@angular/router'
 import { LoadingController, MenuController, NavController, Platform } from '@ionic/angular'
-import { GreenWalkRequest } from '../../requests/green-walk.request'
+import { GreenWalkRequest } from '../../../requests/green-walk.request'
 
 @Component({
 	selector: 'app-green-walk',

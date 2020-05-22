@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
-import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
-import { GreenWalkRequest } from '../../requests/green-walk.request'
-import { GeolocationService } from '../../services/geolocation/geolocation.service'
+import { GreenWalkLightInterface } from '../../../interfaces/green-walk-light.interface'
+import { GreenWalkRequest } from '../../../requests/green-walk.request'
+import { GeolocationService } from '../../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
-import { LocalService } from '../../services/local/local.service'
-import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
+import { LocalService } from '../../../services/local/local.service'
+import { LocationModalComponent } from '../../../components/location-modal/location-modal.component'
 
 @Component({
 	selector: 'app-green-walks',
