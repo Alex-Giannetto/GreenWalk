@@ -30,6 +30,5 @@ const routes: Routes = [
 		GreenWalkPageModule,
 		AddGreenWalkPageModule,
 	],
-	declarations: [],
 })
 export class GreenWalkModule {}
