@@ -43,8 +43,8 @@ export class GreenWalksPage implements OnInit {
 			backdropDismiss: false
 		})
 		await modal.present()
-		await modal.onWillDismiss()
-
+		const {data: coordinates} = await modal.onWillDismiss()
+		await this.geolocationService.setLocation(coordinates)
 		this.init()
 	}
 

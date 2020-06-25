@@ -27,5 +27,8 @@ export const AddGreenWalkForm: FormGroup = new FormGroup({
 		street: new FormControl(null, [
 			Validators.required,
 		]),
+		full: new FormControl(null, [
+			Validators.required,
+		]),
 	}),
 })
