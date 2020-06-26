@@ -26,9 +26,11 @@
                 <ion-datetime
                     [placeholder]="moment().format('DD/MM/YYYY HH:mm')"
                     formControlName="datetime"
-                    display-format="DD/MM/YYYY h:mm"
+                    display-format="DD/MM/YYYY hh:mm"
                     cancel-text="Annuler"
                     done-text="Valider"
+                    [min]="moment().format('YYYY-MM-DD')"
+
                 ></ion-datetime>
             </label>
 

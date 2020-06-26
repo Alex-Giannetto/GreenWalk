@@ -16,6 +16,7 @@ export class LocationModalComponent implements OnInit {
 	constructor (private modalController: ModalController) {}
 
 	async ngOnInit () {
+
 		// const style = true ? 'mapbox://styles/mapbox/streets-v11' : 'mapbox://styles/mapbox/dark-v10'
 		const style = 'mapbox://styles/mapbox/streets-v11'
 

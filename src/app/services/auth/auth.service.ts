@@ -17,6 +17,7 @@ export class AuthService {
 					reject('Mauvais retours de l\'api')
 				}
 
+				data.token = token
 				LocalService.setUser(data)
 				resolve(data)
 			}, e => this.handleError(e, reject))
