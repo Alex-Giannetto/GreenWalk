@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment'
 import { LocalService } from '../services/local/local.service'
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class Request {
 
@@ -16,20 +16,27 @@ export class Request {
 		return this.httpClient.get(url, this.getHeader(headers))
 	}
 
-	post (url: string, data: object, headers: { [key: string]: string } = null, prefixUrl: boolean = true): Observable<object> {
+	post (
+		url: string, data: object, headers: { [key: string]: string } = null,
+		prefixUrl: boolean = true): Observable<object> {
 		url = prefixUrl ? environment.api.url + url : url
 		return this.httpClient.post(url, data, this.getHeader(headers))
 	}
 
-	getHeader (headers: { [key: string]: string }): { headers: HttpHeaders } {
+	getHeader (externalHeader: { [key: string]: string }): { headers: HttpHeaders } {
 		const token = LocalService.token
 
 		const xAuthTokenHeader = token ? {
 			'X-AUTH-TOKEN': token,
 		} : {}
-
-		return {
-			headers: new HttpHeaders({ ...xAuthTokenHeader, ...headers })
-		}
+		const headers = new HttpHeaders({
+			...xAuthTokenHeader,
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+			Accept: 'application/json',
+			'content-type': 'application/json',
+			...externalHeader,
+		})
+		return { headers }
 	}
 }

@@ -4,19 +4,18 @@ import { FormsModule } from '@angular/forms'
 
 import { IonicModule } from '@ionic/angular'
 
-import { GreenWalksPageRoutingModule } from './green-walks-routing.module'
-
 import { GreenWalksPage } from './green-walks.page'
-import { ComponentsModule } from '../../components/components.module'
-import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
+import { ComponentsModule } from '../../../components/components.module'
+import { LocationModalComponent } from '../../../components/location-modal/location-modal.component'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		IonicModule,
-		GreenWalksPageRoutingModule,
-		ComponentsModule
+		ComponentsModule,
+		RouterModule
 	],
 	declarations: [GreenWalksPage],
 	entryComponents: [LocationModalComponent],

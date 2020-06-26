@@ -4,18 +4,15 @@ import { FormsModule } from '@angular/forms'
 
 import { IonicModule } from '@ionic/angular'
 
-import { GreenWalkPageRoutingModule } from './green-walk-routing.module'
-
 import { GreenWalkPage } from './green-walk.page'
-import { ComponentsModule } from '../../components/components.module'
-import { PipesModule } from '../../pipes/pipes.module'
+import { ComponentsModule } from '../../../components/components.module'
+import { PipesModule } from '../../../pipes/pipes.module'
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		IonicModule,
-		GreenWalkPageRoutingModule,
 		ComponentsModule,
 		PipesModule,
 	],

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { Map, NavigationControl } from 'mapbox-gl'
-import { GeolocationService } from '../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
-import { CoordinatesTestExemple } from '../../interfaces/coordinates.Interface'
-import { LocationInterface } from '../../interfaces/location.interface'
+import { CoordinatesInterface } from '../../interfaces/coordinates.Interface'
 
 @Component({
 	selector: 'app-location-modal',
@@ -13,15 +11,11 @@ import { LocationInterface } from '../../interfaces/location.interface'
 })
 export class LocationModalComponent implements OnInit {
 	map: Map
+	coordinates: CoordinatesInterface
 
-	constructor (private geolocationService: GeolocationService, private modalController: ModalController) {}
+	constructor (private modalController: ModalController) {}
 
 	async ngOnInit () {
-		let location = JSON.parse(localStorage.getItem('location')) as LocationInterface
-
-		if (!location) {
-			location = { coordinates: CoordinatesTestExemple }
-		}
 
 		// const style = true ? 'mapbox://styles/mapbox/streets-v11' : 'mapbox://styles/mapbox/dark-v10'
 		const style = 'mapbox://styles/mapbox/streets-v11'
@@ -29,7 +23,7 @@ export class LocationModalComponent implements OnInit {
 		this.map = new Map({
 			accessToken: environment.mapBox.token,
 			container: 'map',
-			center: { lat: location.coordinates.latitude, lng: location.coordinates.longitude },
+			center: { lat: this.coordinates.latitude, lng: this.coordinates.longitude },
 			zoom: 13,
 			style,
 		})
@@ -42,8 +36,8 @@ export class LocationModalComponent implements OnInit {
 	async setLocationBtnClicked () {
 		const { lat: latitude, lng: longitude } = this.map.getCenter()
 		const coordinates = { latitude, longitude }
-		await this.geolocationService.setLocation(coordinates)
-		await this.modalController.dismiss()
+
+		await this.modalController.dismiss(coordinates)
 	}
 
 }

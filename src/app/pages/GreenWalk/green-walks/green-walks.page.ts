@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
-import { GreenWalkLightInterface } from '../../interfaces/green-walk-light.interface'
-import { GreenWalkRequest } from '../../requests/green-walk.request'
-import { GeolocationService } from '../../services/geolocation/geolocation.service'
+import { GreenWalkLightInterface } from '../../../interfaces/green-walk-light.interface'
+import { GreenWalkRequest } from '../../../requests/green-walk.request'
+import { GeolocationService } from '../../../services/geolocation/geolocation.service'
 import { ModalController } from '@ionic/angular'
-import { LocalService } from '../../services/local/local.service'
-import { LocationModalComponent } from '../../components/location-modal/location-modal.component'
+import { LocalService } from '../../../services/local/local.service'
+import { LocationModalComponent } from '../../../components/location-modal/location-modal.component'
 
 @Component({
 	selector: 'app-green-walks',
@@ -14,7 +14,7 @@ import { LocationModalComponent } from '../../components/location-modal/location
 export class GreenWalksPage implements OnInit {
 
 	state = {
-		loading: false
+		loading: false,
 	}
 
 	greenWalks: GreenWalkLightInterface[] = []
@@ -32,7 +32,7 @@ export class GreenWalksPage implements OnInit {
 			this.init()
 
 		} catch (e) {
-			console.error(e)
+			console.error('GreenWalks::onInit', e)
 			this.chooseLocation()
 		}
 	}
@@ -40,11 +40,12 @@ export class GreenWalksPage implements OnInit {
 	async chooseLocation () {
 		const modal = await this.modalController.create({
 			component: LocationModalComponent,
-			backdropDismiss: false
+			backdropDismiss: false,
+			componentProps: { coordinates: { latitude: 48.856886091827164, longitude: 2.341345178964275 } },
 		})
 		await modal.present()
-		await modal.onWillDismiss()
-
+		const { data: coordinates } = await modal.onWillDismiss()
+		await this.geolocationService.setLocation(coordinates)
 		this.init()
 	}
 
@@ -66,8 +67,8 @@ export class GreenWalksPage implements OnInit {
 	private getGreenWalks (): Promise<GreenWalkLightInterface[]> {
 		return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
 
-			this.greenWalkRequestService.getGreenWalks(LocalService.location.coordinates, 0, 0)
-				.subscribe(greenWalks => resolve(greenWalks), error => reject(error))
+			this.greenWalkRequestService.getAll(LocalService.location.coordinates, 0, 0).
+				subscribe(greenWalks => resolve(greenWalks), error => reject(error))
 
 		})
 	}

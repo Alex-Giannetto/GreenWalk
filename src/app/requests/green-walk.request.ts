@@ -4,13 +4,16 @@ import { GreenWalkLightInterface } from '../interfaces/green-walk-light.interfac
 import { CoordinatesInterface } from '../interfaces/coordinates.Interface'
 import { GreenWalksFixtures } from '../fixtures/GreenWalksLight.fixture'
 import { GreenWalkInterface } from '../interfaces/green-walk.interface'
+import { Request } from './request'
 
 @Injectable({
 	providedIn: 'root',
 })
 export class GreenWalkRequest {
 
-	getGreenWalks (location: CoordinatesInterface, radius: number, page: number): Observable<GreenWalkLightInterface[]> {
+	constructor (private requestService: Request) { }
+
+	getAll (location: CoordinatesInterface, radius: number, page: number): Observable<GreenWalkLightInterface[]> {
 		return new Observable<GreenWalkLightInterface[]>(observer => {
 			setTimeout(() => observer.next([...GreenWalksFixtures, ...GreenWalksFixtures]), 1000)
 		})
@@ -23,6 +26,10 @@ export class GreenWalkRequest {
 				if (greenWalk) {observer.next(greenWalk)} else {observer.error('no data')}
 			}, 1000)
 		})
+	}
+
+	add (greenwalk: GreenWalkInterface): Observable<any> {
+		return this.requestService.post('greenwalk', {...greenwalk})
 	}
 
 }
