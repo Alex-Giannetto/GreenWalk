@@ -7,7 +7,6 @@ import { LocationModalComponent } from '../../../components/location-modal/locat
 import { GeolocationService } from '../../../services/geolocation/geolocation.service'
 import { CoordinatesInterface } from '../../../interfaces/coordinates.Interface'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
-import { EditingService } from '../../../services/editing/editing.service'
 
 @Component({
 	selector: 'app-add-green-walk',
@@ -27,12 +26,10 @@ export class AddGreenWalkPage implements OnInit {
 		private loadingController: LoadingController,
 		private greenWalkRequest: GreenWalkRequest,
 		private navController: NavController,
-		private editingService: EditingService
 	) {}
 
 	ngOnInit (): void {
 		this.formGroup.patchValue({ location: { ...this.coordinates } })
-		this.formGroup.valueChanges.subscribe(value => this.editingService.state.emit(true))
 	}
 
 	async openLocationModal () {

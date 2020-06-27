@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { HomeTabsPage } from './home-tabs.page'
 import { GreenWalksPage } from '../GreenWalk/green-walks/green-walks.page'
 import { AddGreenWalkPage } from '../GreenWalk/add-green-walk/add-green-walk.page'
-import { EditingGuard } from '../../guards/editing.guard'
 
 const routes: Routes = [
   {
@@ -18,7 +17,6 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddGreenWalkPage,
-        canDeactivate: [EditingGuard]
       },
       {
         path: '**',
