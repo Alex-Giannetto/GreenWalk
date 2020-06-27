@@ -1,10 +1,10 @@
 <ion-app>
     <ion-split-pane contentId="main-content">
-        <ion-menu contentId="main-content" type="overlay">
+        <ion-menu contentId="main-content" type="overlay" *ngIf="localService.user">
             <ion-content>
                 <ion-list id="inbox-list">
-                    <ion-list-header>{{user.firstName}}</ion-list-header>
-                    <ion-note>{{user.email}}</ion-note>
+                    <ion-list-header>{{localService.user.firstName}}</ion-list-header>
+                    <ion-note>{{localService.user.email}}</ion-note>
 
                     <ion-menu-toggle *ngFor="let p of appPages; let i = index" auto-hide="false">
                         <ion-item (click)="selectedIndex = i" [class.selected]="selectedIndex == i"

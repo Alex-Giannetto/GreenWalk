@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
+import {AuthentificationGuard} from "./guards/authentification.guard";
 
 const routes: Routes = [
 	{
@@ -18,6 +19,7 @@ const routes: Routes = [
 	{
 		path: 'green-walks',
 		loadChildren: './pages/GreenWalk/green-walk.module#GreenWalkModule',
+		canActivate: [AuthentificationGuard]
 	},
 	{
 		path: '**',
