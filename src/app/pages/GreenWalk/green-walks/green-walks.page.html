@@ -1,8 +1,6 @@
 <ion-header translucent="true">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button color="dark"></ion-menu-button>
-        </ion-buttons>
+
         <ion-title>Les sorties</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="chooseLocation()" color="dark">
@@ -21,20 +19,21 @@
             <ion-title size="large">Les sorties</ion-title>
         </ion-toolbar>
     </ion-header>
-    <ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
+
 
     <div class="greenWalks">
         <app-green-walk-card
-            *ngFor="let greenWalk of greenWalks"
-            [greenWalk]="greenWalk"
-            [routerLink]="greenWalk.id"
+                *ngFor="let greenWalk of greenWalks"
+                [greenWalk]="greenWalk"
+                [routerLink]="'/green-walks/' + greenWalk.id"
         ></app-green-walk-card>
     </div>
 
     <ion-infinite-scroll threshold="400px" (ionInfinite)="loadNextGreenWalks($event)">
         <ion-infinite-scroll-content
-            loadingSpinner="circular"
-            loadingText="Chargement des donnéees…"
+                loadingSpinner="circular"
+                loadingText="Chargement des donnéees…"
         ></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
+<ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
