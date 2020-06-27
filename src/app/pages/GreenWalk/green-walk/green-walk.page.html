@@ -13,6 +13,7 @@
             <div class="elements">
                 <header class="ion-padding-horizontal">
                     <h1 *ngIf="map.loaded else loading">{{greenWalk.name}}</h1>
+                    <h2 *ngIf="map.loaded else loading">{{greenWalk.datetime | dateDifference:true:true}}</h2>
                     <div class="subtitle ion-padding-bottom">
                         <div class="location">
                             <ion-icon name="pin"></ion-icon>

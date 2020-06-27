@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular'
 import { ParticipantsComponent } from './participants/participants.component'
 import { AvatarComponent } from './avatar/avatar.component'
 import { LocationModalComponent } from './location-modal/location-modal.component'
+import { PipesModule } from '../pipes/pipes.module'
 
 @NgModule({
-	imports: [
-		CommonModule,
-		IonicModule,
-	],
+  imports: [
+    CommonModule,
+    IonicModule,
+    PipesModule,
+  ],
 	exports: [
 		GreenWalkCardComponent,
 		LocationModalComponent,

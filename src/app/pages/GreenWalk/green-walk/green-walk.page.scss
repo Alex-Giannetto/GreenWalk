@@ -109,10 +109,17 @@ ion-content {
       border-radius: var(--border-radius);
       box-shadow: 0 0 10px rgba(#000, .3);
 
-      h1 {
+      h1, h2 {
         margin: 0;
         font-size: 20px;
         text-align: center;
+        &:first-letter{
+          text-transform: capitalize;
+        }
+      }
+      h2{
+        margin-top: 5px;
+        font-size: 15px;
       }
 
       .subtitle {
