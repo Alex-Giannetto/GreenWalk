@@ -1,12 +1,6 @@
 <ion-header translucent="true">
     <ion-toolbar>
-
         <ion-title>Les sorties</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="chooseLocation()" color="dark">
-                <ion-icon slot="icon-only" name="location-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -21,13 +15,11 @@
     </ion-header>
 
 
-    <div class="greenWalks">
-        <app-green-walk-card
-                *ngFor="let greenWalk of greenWalks"
-                [greenWalk]="greenWalk"
-                [routerLink]="'/green-walks/' + greenWalk.id"
-        ></app-green-walk-card>
+    <div class="changeLocation">
+        <button class="touchable" (click)="chooseLocation()">Modifier ma localisation</button>
     </div>
+
+    <app-green-walk-list [greenWalks]="greenWalks"></app-green-walk-list>
 
     <ion-infinite-scroll threshold="400px" (ionInfinite)="loadNextGreenWalks($event)">
         <ion-infinite-scroll-content
