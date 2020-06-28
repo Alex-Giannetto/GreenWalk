@@ -81,7 +81,11 @@
   --ion-text-color: #000000;
   --ion-text-color-rgb: 0, 0, 0;
 
-  --ion-padding: 20px
+  --ion-padding: 20px;
+
+  --color-filter: #ececec;
+  --color-filter-segment: #FAFAFA;
+  --color-filter-segment-background: #ececec;
 }
 
 .ios body {
@@ -157,6 +161,10 @@
     --ion-color-light-contrast-rgb: 255, 255, 255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    --color-filter: #161f2b;
+    --color-filter-segment: #161f2b;
+    --color-filter-segment-background: #202f42;
   }
 
   /*

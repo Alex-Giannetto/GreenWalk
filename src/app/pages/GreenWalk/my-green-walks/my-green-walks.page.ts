@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { GreenWalkLightInterface } from '../../../interfaces/green-walk-light.interface'
+import { LocalService } from '../../../services/local/local.service'
+import { GreenWalkRequest } from '../../../requests/green-walk.request'
+import { Platform } from '@ionic/angular'
+import * as Moment from 'moment'
 
 @Component({
   selector: 'app-my-green-walks',
@@ -6,10 +11,47 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-green-walks.page.scss'],
 })
 export class MyGreenWalksPage implements OnInit {
+  state = {
+    loading: false,
+    category: 'next',
+  }
 
-  constructor() { }
+  greenWalks: GreenWalkLightInterface[] = []
 
-  ngOnInit() {
+  constructor (
+    private greenWalkRequest: GreenWalkRequest,
+    public platform: Platform,
+  ) {}
+
+  ngOnInit () {
+    this.init()
+  }
+
+  ionViewWillEnter(){
+    this.init()
+  }
+
+  init (event = null) {
+    this.state.loading = true
+    this.greenWalkRequest.getAll(LocalService.location.coordinates, 0, 0).
+      subscribe(greenwalks => {
+        this.greenWalks = greenwalks
+        this.state.loading = false
+
+        if (event) {
+          event.target.complete()
+        }
+      })
+  }
+
+  filter (): GreenWalkLightInterface[] {
+    return this.greenWalks.filter(greenWalk => {
+      if (this.state.category === 'next') {
+        return Moment(greenWalk.datetime) > Moment()
+      } else {
+        return Moment(greenWalk.datetime) < Moment()
+      }
+    })
   }
 
 }

@@ -1,12 +1,13 @@
-.changeLocation {
+.toolbar {
   width: 100%;
   padding: var(--ion-padding);
+  padding-bottom: 0;
 
   button{
-    background-color: var(--ion-color-light);
+    background-color: var(--color-filter);
     color: var(--ion-text-color);
     font-size: 15px;
-    padding: var(--ion-padding);
+    height: 45px;
     text-align: center;
     font-weight: bolder;
     border-radius: var(--border-radius);
