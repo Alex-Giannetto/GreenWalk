@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { HomeTabsPage } from './home-tabs.page'
 import { GreenWalksPage } from '../GreenWalk/green-walks/green-walks.page'
 import { AddGreenWalkPage } from '../GreenWalk/add-green-walk/add-green-walk.page'
+import { MyGreenWalksPage } from '../GreenWalk/my-green-walks/my-green-walks.page'
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'all',
         component: GreenWalksPage,
+      },
+      {
+        path: 'registered',
+        component: MyGreenWalksPage,
       },
       {
         path: 'add',

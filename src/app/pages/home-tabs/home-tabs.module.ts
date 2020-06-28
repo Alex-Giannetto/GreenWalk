@@ -9,6 +9,7 @@ import { HomeTabsPageRoutingModule } from './home-tabs-routing.module'
 import { HomeTabsPage } from './home-tabs.page'
 import { GreenWalksPageModule } from '../GreenWalk/green-walks/green-walks.module'
 import { AddGreenWalkPageModule } from '../GreenWalk/add-green-walk/add-green-walk.module'
+import { MyGreenWalksPageModule } from '../GreenWalk/my-green-walks/my-green-walks.module'
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { AddGreenWalkPageModule } from '../GreenWalk/add-green-walk/add-green-wa
     IonicModule,
     HomeTabsPageRoutingModule,
     GreenWalksPageModule,
+    MyGreenWalksPageModule,
     AddGreenWalkPageModule,
   ],
   declarations: [HomeTabsPage],
