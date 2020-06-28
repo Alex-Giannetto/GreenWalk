@@ -8,27 +8,28 @@ import { AddGreenWalkPage } from './add-green-walk/add-green-walk.page'
 import { AddGreenWalkPageModule } from './add-green-walk/add-green-walk.module'
 
 const routes: Routes = [
-	{
-		path: '',
-		component: GreenWalksPage,
-	},
-	{
-		path: 'add',
-		component: AddGreenWalkPage,
-		pathMatch: 'full',
-	},
-	{
-		path: ':id',
-		component: GreenWalkPage,
-	},
+  {
+    path: '',
+    component: GreenWalksPage,
+  },
+  {
+    path: 'add',
+    component: AddGreenWalkPage,
+    pathMatch: 'full',
+  },
+  {
+    path: ':id',
+    component: GreenWalkPage,
+  },
 ]
 
 @NgModule({
-	imports: [
-		RouterModule.forChild(routes),
-		GreenWalksPageModule,
-		GreenWalkPageModule,
-		AddGreenWalkPageModule,
-	],
+  imports: [
+    RouterModule.forChild(routes),
+    GreenWalksPageModule,
+    GreenWalkPageModule,
+    AddGreenWalkPageModule,
+  ],
 })
-export class GreenWalkModule {}
+export class GreenWalkModule {
+}

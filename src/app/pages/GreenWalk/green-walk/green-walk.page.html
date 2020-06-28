@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" id="page">
     <ion-header>
-        <img [src]="getMap()|safe:'url'" id="map" (load)="mapIsLoaded()">
+        <img [src]="getMap()|safe:'url'" id="map" [style.opacity]="map.loaded? 1 : 0" (load)="mapIsLoaded()">
     </ion-header>
 
     <ion-content  [fullscreen]="true" id="content">
@@ -13,6 +13,7 @@
             <div class="elements">
                 <header class="ion-padding-horizontal">
                     <h1 *ngIf="map.loaded else loading">{{greenWalk.name}}</h1>
+                    <h2 *ngIf="map.loaded else loading">{{greenWalk.datetime | dateDifference:true:true}}</h2>
                     <div class="subtitle ion-padding-bottom">
                         <div class="location">
                             <ion-icon name="pin"></ion-icon>
@@ -26,7 +27,7 @@
                         <app-participants *ngIf="map.loaded" [greenWalk]="greenWalk"></app-participants>
                     </div>
 
-                    <button class="btn" [disabled]="!greenWalk">Participer</button>
+                    <button class="btn touchable" [disabled]="!greenWalk">Participer</button>
                 </header>
 
                 <p *ngIf="map.loaded"

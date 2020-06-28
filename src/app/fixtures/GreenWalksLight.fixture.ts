@@ -5,7 +5,7 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 	{
 		id: '1',
 		name: 'Châtelet-les-Halles',
-		datetime: '2020-04-01 15:08:00',
+		datetime: '2020-07-01 15:08:00',
 		location: {
 			...LocationTestExample,
 			coordinates: {

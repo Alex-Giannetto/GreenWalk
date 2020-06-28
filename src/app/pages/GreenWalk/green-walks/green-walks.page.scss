@@ -1,13 +1,21 @@
-.greenWalks {
+.toolbar {
+  width: 100%;
   padding: var(--ion-padding);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: var(--ion-padding);
+  padding-bottom: 0;
 
-  @media screen and (min-width: 700px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media screen and (min-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
+  button{
+    background-color: var(--color-filter);
+    color: var(--ion-text-color);
+    font-size: 15px;
+    height: 45px;
+    text-align: center;
+    font-weight: bolder;
+    border-radius: var(--border-radius);
+    width: 100%;
+
+    &.touchable {
+      transition: transform .2s;
+    }
   }
 }
+

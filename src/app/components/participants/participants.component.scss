@@ -6,7 +6,7 @@
     flex-direction: column;
     margin-left: 5px;
     align-items: center;
-    color: env(--ion-text-color);
+    color: var(--ion-text-color);
 
     .text {
       font-size: 14px;
@@ -23,7 +23,7 @@
       width: 100%;
 
       .round {
-        background-color: env(--ion-text-color);
+        background-color: var(--ion-text-color);
         margin: 0 1px;
         width: 8px;
         height: 8px;

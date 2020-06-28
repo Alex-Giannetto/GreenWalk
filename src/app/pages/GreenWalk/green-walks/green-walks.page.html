@@ -1,14 +1,6 @@
 <ion-header translucent="true">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button color="dark"></ion-menu-button>
-        </ion-buttons>
         <ion-title>Les sorties</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="chooseLocation()" color="dark">
-                <ion-icon slot="icon-only" name="location-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -21,20 +13,29 @@
             <ion-title size="large">Les sorties</ion-title>
         </ion-toolbar>
     </ion-header>
-    <ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
 
-    <div class="greenWalks">
-        <app-green-walk-card
-            *ngFor="let greenWalk of greenWalks"
-            [greenWalk]="greenWalk"
-            [routerLink]="greenWalk.id"
-        ></app-green-walk-card>
+
+    <div class="toolbar">
+        <button class="touchable" (click)="chooseLocation()">Modifier ma localisation</button>
     </div>
+
+    <ng-container *ngIf="greenWalks.length > 0 || state.loading; else noContent">
+        <app-green-walk-list [greenWalks]="greenWalks"></app-green-walk-list>
+    </ng-container>
 
     <ion-infinite-scroll threshold="400px" (ionInfinite)="loadNextGreenWalks($event)">
         <ion-infinite-scroll-content
-            loadingSpinner="circular"
-            loadingText="Chargement des donnéees…"
+                loadingSpinner="circular"
+                loadingText="Chargement des donnéees…"
         ></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
+<ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
+
+<ng-template #noContent>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Aucune GreenWalk</ion-card-subtitle>
+        </ion-card-header>
+    </ion-card>
+</ng-template>

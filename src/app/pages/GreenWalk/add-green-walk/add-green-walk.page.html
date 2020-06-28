@@ -36,7 +36,7 @@
 
             <label>
                 Description
-                <ion-textarea formControlName="description" maxlength="1000" spellcheck auto-grow></ion-textarea>
+                <ion-textarea formControlName="description" maxlength="1000" rows="10" spellcheck auto-grow></ion-textarea>
             </label>
 
             <ion-button color="light" expand="block" (click)="openLocationModal()">
@@ -51,5 +51,5 @@
 
 </ion-content>
 <div class="ion-padding">
-    <button class="btn" [disabled]="formGroup.invalid" (click)="onSubmit()">Valider</button>
+    <button class="btn" [class.touchable]="formGroup.valid" [disabled]="formGroup.invalid" (click)="onSubmit()">Valider</button>
 </div>

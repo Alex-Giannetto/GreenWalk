@@ -37,6 +37,10 @@ export class GreenWalksPage implements OnInit {
 		}
 	}
 
+	ionViewWillEnter(){
+		this.init()
+	}
+
 	async chooseLocation () {
 		const modal = await this.modalController.create({
 			component: LocationModalComponent,
