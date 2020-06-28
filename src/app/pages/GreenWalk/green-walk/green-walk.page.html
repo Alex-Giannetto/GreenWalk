@@ -27,7 +27,7 @@
                         <app-participants *ngIf="map.loaded" [greenWalk]="greenWalk"></app-participants>
                     </div>
 
-                    <button class="btn" [disabled]="!greenWalk">Participer</button>
+                    <button class="btn touchable" [disabled]="!greenWalk">Participer</button>
                 </header>
 
                 <p *ngIf="map.loaded"

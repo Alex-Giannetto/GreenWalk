@@ -1,5 +1,11 @@
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Roboto, sans-serif;
+  outline: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-callout: none;
+  -webkit-touch-callout: none;
+
 }
 
 .page {
@@ -26,7 +32,19 @@
 }
 
 
-ion-skeleton-text{
+.touchable {
+  transition: all .5s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(.95);
+  }
+}
+
+ion-skeleton-text {
   border-radius: 0;
   height: 15px;
 }

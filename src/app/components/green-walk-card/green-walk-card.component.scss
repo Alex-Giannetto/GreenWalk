@@ -12,4 +12,7 @@ ion-card {
     padding: 10px;
   }
 
+  &.touchable{
+    transition: all .2s;
+  }
 }
