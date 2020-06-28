@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" id="page">
     <ion-header>
-        <img [src]="getMap()|safe:'url'" id="map" (load)="mapIsLoaded()">
+        <img [src]="getMap()|safe:'url'" id="map" [style.opacity]="map.loaded? 1 : 0" (load)="mapIsLoaded()">
     </ion-header>
 
     <ion-content  [fullscreen]="true" id="content">

@@ -5,7 +5,7 @@
 export const environment = {
 	production: false,
 	api: {
-		url: 'http://localhost/api/'
+		url: 'http://MacBook-Pro-de-Alex.local/api/'
 	},
 	mapBox: {
 		token: 'pk.eyJ1IjoiYWxleGc3OGJpcyIsImEiOiJjazEzZXR2MGQwN2FqM2NtOTk1bjJ2N3ZlIn0.ot8SN9Ue3V-Lmx_hw5gpog'
