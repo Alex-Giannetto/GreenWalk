@@ -21,7 +21,7 @@ export class ProfilePage {
     private toastController: ToastController) {}
 
   async modalNextVersion () {
-    (await this.toastController.create({
+    await (await this.toastController.create({
       message: 'Cette fonction n\'est pas encore disponible',
       duration: 2000,
       color: 'light',
