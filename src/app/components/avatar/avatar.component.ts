@@ -9,7 +9,7 @@ import { PersonInterface } from '../../interfaces/person.interface'
 export class AvatarComponent {
 
 	@Input() person: PersonInterface
-	@Input() size: 'little' | 'big' | 'side-menu'
+	@Input() size: 'little' | 'big'
 	@Input() round: boolean
 	@Input() shadow: boolean
 }

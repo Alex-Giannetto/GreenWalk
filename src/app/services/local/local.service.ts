@@ -26,4 +26,8 @@ export class LocalService {
 	static setUser (user: UserInterface): void {
 		localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(user))
 	}
+
+	static clear (){
+		localStorage.clear()
+	}
 }

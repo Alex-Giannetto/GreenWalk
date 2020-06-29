@@ -10,6 +10,7 @@ import { HomeTabsPage } from './home-tabs.page'
 import { GreenWalksPageModule } from '../GreenWalk/green-walks/green-walks.module'
 import { AddGreenWalkPageModule } from '../GreenWalk/add-green-walk/add-green-walk.module'
 import { MyGreenWalksPageModule } from '../GreenWalk/my-green-walks/my-green-walks.module'
+import { ProfilePageModule } from '../profile/profile.module'
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MyGreenWalksPageModule } from '../GreenWalk/my-green-walks/my-green-wal
     GreenWalksPageModule,
     MyGreenWalksPageModule,
     AddGreenWalkPageModule,
+    ProfilePageModule,
   ],
   declarations: [HomeTabsPage],
 })

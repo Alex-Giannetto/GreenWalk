@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router'
     LocationModalComponent,
     ParticipantsComponent,
     GreenWalkListComponents,
+    AvatarComponent,
   ],
   declarations: [
     GreenWalkCardComponent,

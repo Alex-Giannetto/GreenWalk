@@ -5,6 +5,7 @@ import { HomeTabsPage } from './home-tabs.page'
 import { GreenWalksPage } from '../GreenWalk/green-walks/green-walks.page'
 import { AddGreenWalkPage } from '../GreenWalk/add-green-walk/add-green-walk.page'
 import { MyGreenWalksPage } from '../GreenWalk/my-green-walks/my-green-walks.page'
+import { ProfilePage } from '../profile/profile.page'
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddGreenWalkPage,
+      },
+      {
+        path: 'profile',
+        component: ProfilePage
       },
       {
         path: '**',
