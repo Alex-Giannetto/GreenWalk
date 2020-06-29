@@ -10,7 +10,7 @@ import * as Moment from 'moment'
   templateUrl: './my-green-walks.page.html',
   styleUrls: ['./my-green-walks.page.scss'],
 })
-export class MyGreenWalksPage implements OnInit {
+export class MyGreenWalksPage {
   state = {
     loading: false,
     category: 'next',
@@ -23,18 +23,13 @@ export class MyGreenWalksPage implements OnInit {
     public platform: Platform,
   ) {}
 
-  ngOnInit () {
-    this.init()
-  }
-
   ionViewWillEnter(){
     this.init()
   }
 
   init (event = null) {
     this.state.loading = true
-    this.greenWalkRequest.getAll(LocalService.location.coordinates, 0, 0).
-      subscribe(greenwalks => {
+    this.greenWalkRequest.getUserRegisteredGreenWalk().then( greenwalks => {
         this.greenWalks = greenwalks
         this.state.loading = false
 

@@ -22,11 +22,12 @@ export class GreenWalkRequest {
       location: {
         street: data.street,
         zipCode: data.zipCode,
+        city: data.city,
         coordinates: {
           latitude: data.latitude,
           longitude: data.longitude,
         },
-      },
+      }
     }
   }
 
@@ -56,6 +57,17 @@ export class GreenWalkRequest {
     return new Promise<GreenWalkInterface>((resolve, reject) => {
       this.requestService.get(url).subscribe(
         (data: any[]) => resolve(GreenWalkRequest.convertGreenWalk(data)),
+        reject,
+      )
+    })
+  }
+
+  getUserRegisteredGreenWalk(): Promise<GreenWalkLightInterface[]>{
+    const url = `greenwalk/getGreenwalk`
+
+    return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
+      this.requestService.get(url).subscribe(
+        (data: any[]) => resolve(data.map(GreenWalkRequest.convertGreenWalkLight)),
         reject,
       )
     })
