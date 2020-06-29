@@ -23,8 +23,12 @@
             </form>
         </div>
 
-        <ion-button (click)='onSubmit()' [disabled]='this.formGroup.invalid' class="btn uppercase" type='submit'>
-            Connexion
-        </ion-button>
+        <div class="bottom">
+            <a class="register-link" routerLink="/register">S'inscrire</a>
+
+            <ion-button (click)='onSubmit()' [disabled]='this.formGroup.invalid' class="btn uppercase" type='submit'>
+                Connexion
+            </ion-button>
+        </div>
     </div>
 </ion-content>

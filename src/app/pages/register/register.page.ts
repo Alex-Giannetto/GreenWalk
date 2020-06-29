@@ -74,6 +74,10 @@ export class RegisterPage {
 
 	}
 
+	backTologin(){
+		this.navController.back()
+	}
+
 	private getGroup (step: number): FormGroup {
 		return this.formGroup.controls['step' + step] as FormGroup
 	}

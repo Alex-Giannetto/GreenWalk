@@ -15,10 +15,10 @@ export class AuthRequest {
   }
 
   register (
-    email: string, firstname: string, birthdate: string,
+    email: string, firstName: string, birthDate: string,
     password: string): Observable<any> {
     return this.requestService.post('auth/signup',
-      { email, firstname, birthdate, password }, null, true, false)
+      { email, firstName, birthDate, password }, null, true, false)
   }
 
   getUser (token: string): Observable<any> {
