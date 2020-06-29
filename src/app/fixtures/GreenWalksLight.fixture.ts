@@ -16,7 +16,7 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 		author: {
 			firstName: 'Judith',
 		},
-		participant: [
+		participants: [
 			{ firstName: 'Benoit' },
 			{ firstName: 'Ilies' },
 			{ firstName: 'Théo' },
@@ -41,7 +41,7 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 		author: {
 			firstName: 'Alex',
 		},
-		participant: [
+		participants: [
 			{ firstName: 'Isabelle' },
 			{ firstName: 'Juliette' },
 			{ firstName: 'Paul' },
@@ -64,7 +64,7 @@ export const GreenWalksFixtures: GreenWalkInterface[] = [
 		author: {
 			firstName: 'Alex',
 		},
-		participant: [
+		participants: [
 			{ firstName: 'Isabelle' },
 			{ firstName: 'Juliette' },
 			{ firstName: 'Paul' },

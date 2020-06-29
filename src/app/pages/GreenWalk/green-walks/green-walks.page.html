@@ -22,13 +22,6 @@
     <ng-container *ngIf="greenWalks.length > 0 || state.loading; else noContent">
         <app-green-walk-list [greenWalks]="greenWalks"></app-green-walk-list>
     </ng-container>
-
-    <ion-infinite-scroll threshold="400px" (ionInfinite)="loadNextGreenWalks($event)">
-        <ion-infinite-scroll-content
-                loadingSpinner="circular"
-                loadingText="Chargement des donnéees…"
-        ></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
 </ion-content>
 <ion-progress-bar *ngIf="state.loading" color="dark" type="indeterminate"></ion-progress-bar>
 

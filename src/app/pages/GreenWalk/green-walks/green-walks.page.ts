@@ -53,14 +53,9 @@ export class GreenWalksPage implements OnInit {
 		this.init()
 	}
 
-	async loadNextGreenWalks (event) {
-		this.greenWalks.push(...await this.getGreenWalks())
-		event.target.complete()
-	}
-
 	async init (event = null) {
 		this.state.loading = true
-		this.greenWalks = await this.getGreenWalks()
+		this.greenWalks = await this.greenWalkRequestService.getAll(LocalService.location.coordinates)
 		this.state.loading = false
 
 		if (event) {
@@ -68,12 +63,5 @@ export class GreenWalksPage implements OnInit {
 		}
 	}
 
-	private getGreenWalks (): Promise<GreenWalkLightInterface[]> {
-		return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
 
-			this.greenWalkRequestService.getAll(LocalService.location.coordinates, 0, 0).
-				subscribe(greenWalks => resolve(greenWalks), error => reject(error))
-
-		})
-	}
 }

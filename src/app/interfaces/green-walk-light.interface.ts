@@ -7,7 +7,7 @@ export interface GreenWalkLightInterface {
 	datetime: string
 	location: LocationInterface
 	author: PersonInterface
-	participant: PersonInterface[]
+	participants: PersonInterface[]
 }
 
 export const GreenWalkLightTestExample: GreenWalkLightInterface = {
@@ -16,5 +16,5 @@ export const GreenWalkLightTestExample: GreenWalkLightInterface = {
 	datetime: '1970-01-01',
 	location: LocationTestExample,
 	author: PersonTestExample,
-	participant: [PersonTestExample, PersonTestExample]
+	participants: [PersonTestExample, PersonTestExample]
 }
