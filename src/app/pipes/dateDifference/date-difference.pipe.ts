@@ -6,9 +6,9 @@ import * as Moment from 'moment'
 })
 export class DateDifferencePipe implements PipeTransform {
 
-  transform(date: string, withDay: boolean = true, withHours: boolean = false,...args: any[]): string {
+  transform(date: string, withDay: boolean = true, withHours: boolean = false, realdate: boolean = true,...args: any[]): string {
 
-    if (Moment().diff(date, 'days') <= -6) {
+    if (realdate && Moment().diff(date, 'days') <= -6) {
       return Moment().locale('Fr').to(date)
     }
 

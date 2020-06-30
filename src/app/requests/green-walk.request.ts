@@ -41,7 +41,7 @@ export class GreenWalkRequest {
   }
 
   getAll (coordinates: CoordinatesInterface): Promise<GreenWalkLightInterface[]> {
-    const url = `greenwalk/${coordinates.latitude}/${coordinates.longitude}`
+    const url = `greenwalk/coordinate/${coordinates.latitude}/${coordinates.longitude}`
 
     return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
       this.requestService.get(url).subscribe(
@@ -75,6 +75,11 @@ export class GreenWalkRequest {
 
   add (greenwalk: GreenWalkInterface): Observable<any> {
     return this.requestService.post('greenwalk', { ...greenwalk })
+  }
+
+  registerUnregister(id: string, registered: boolean): Promise<boolean>{
+    const url = `greenwalk/${id}/${registered? 'unsubscribe' : 'subscribe'}`
+    return this.requestService.get<boolean>(url).toPromise<boolean>()
   }
 
 }

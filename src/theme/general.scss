@@ -41,6 +41,12 @@
   &:active {
     transform: scale(.95);
   }
+
+  &:disabled{
+    &:active, &:hover{
+      transform: none;
+    }
+  }
 }
 
 ion-skeleton-text {
