@@ -4,11 +4,12 @@ import { MapService } from '../../../services/map/map.service'
 import { ActivatedRoute } from '@angular/router'
 import {
   LoadingController,
-  MenuController,
   NavController,
   Platform,
+  ToastController,
 } from '@ionic/angular'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
+import { LocalService } from '../../../services/local/local.service'
 
 @Component({
   selector: 'app-green-walk',
@@ -18,6 +19,10 @@ import { GreenWalkRequest } from '../../../requests/green-walk.request'
 export class GreenWalkPage implements OnInit {
 
   greenWalk: GreenWalkInterface
+
+  state = {
+    isRegister: false,
+  }
 
   map = {
     url: null,
@@ -31,25 +36,50 @@ export class GreenWalkPage implements OnInit {
     private platform: Platform,
     private navController: NavController,
     private greenWalkRequest: GreenWalkRequest,
-    private menuController: MenuController,
+    private toastController: ToastController,
   ) { }
 
   async ngOnInit () {
-    await this.menuController.enable(false)
-
     const id = this.activatedRoute.snapshot.paramMap.get('id')
 
     this.greenWalkRequest.getOneById(id).then(
       greenWalk => {
         this.greenWalk = greenWalk
+
+        const user = LocalService.user
+        this.state.isRegister = greenWalk.participants.filter(
+          participant => user.id === participant.id,
+        ).length !== 0
+
       }).catch(() => {
         this.navController.navigateRoot(['/'])
       },
     )
   }
 
-  async ionViewWillLeave () {
-    await this.menuController.enable(true)
+  async registerAndUnregisterToGreenWalk () {
+    try {
+      // check if user already register to that grenwalk
+      const request = await this.greenWalkRequest.registerUnregister(
+        this.greenWalk.id,
+        this.state.isRegister,
+      )
+
+      if (this.state.isRegister) {
+        this.greenWalk.participants = this.greenWalk.participants.filter(
+          participant => LocalService.user.id !== participant.id)
+      } else {
+        this.greenWalk.participants.push(LocalService.user)
+      }
+      this.state.isRegister = !this.state.isRegister
+    } catch (e) {
+      await (await this.toastController.create({
+        message: 'Une erreur est survenue',
+        duration: 1000,
+        position: 'top',
+        color: 'danger',
+      })).present()
+    }
   }
 
   getMap (): string {

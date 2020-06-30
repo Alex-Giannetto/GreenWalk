@@ -11,20 +11,20 @@ export class Request {
 
   constructor (private httpClient: HttpClient) { }
 
-  get (
+  get<T> (
     url: string, headers: { [key: string]: string } = null,
-    prefixUrl: boolean = true, withToken: boolean = true): Observable<object> {
+    prefixUrl: boolean = true, withToken: boolean = true): Observable<T> {
     url = prefixUrl ? environment.api.url + url : url
-    return this.httpClient.get(url, this.getHeader(headers, withToken))
+    return this.httpClient.get<T>(url, this.getHeader(headers, withToken))
   }
 
-  post (
+  post<T> (
     url: string, data: object, headers: { [key: string]: string } = null,
     prefixUrl: boolean = true,
     withToken: boolean = true,
-  ): Observable<object> {
+  ): Observable<T> {
     url = prefixUrl ? environment.api.url + url : url
-    return this.httpClient.post(url, data, this.getHeader(headers, false))
+    return this.httpClient.post<T>(url, data, this.getHeader(headers, false))
   }
 
   getHeader (
