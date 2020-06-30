@@ -6,7 +6,10 @@
     <ion-content [fullscreen]="true" id="content">
         <div class="navigation-bar">
             <ion-icon (click)="back()" class="btn float touchable" name="chevron-back-outline"></ion-icon>
-            <ion-icon (click)="openMapsApp()" class="btn float touchable" name="map-outline"></ion-icon>
+            <div>
+                <ion-icon (click)="openMapsApp()" class="btn float touchable" name="map-outline"></ion-icon>
+                <ion-icon class="btn float touchable" color="danger" name="trash"></ion-icon>
+            </div>
         </div>
 
         <div class="body">
@@ -27,12 +30,13 @@
                         <app-participants *ngIf="map.loaded" [greenWalk]="greenWalk"></app-participants>
                     </div>
 
-                    <button class="btn touchable"
+                    <ion-button
+                            expand="block"
+                            [color]="state.isRegister? 'medium': 'primary' "
                             (click)="registerAndUnregisterToGreenWalk()"
-                            [disabled]="!greenWalk">
-                        {{state.isRegister? 'Annuler' : 'Participer'}}
-                    </button>
-                    <ion-button expand="block" color="danger">Supprimer</ion-button>
+                            [disabled]="!greenWalk || state.isPast">
+                        {{state.isRegister ? 'Désinscription' : 'Participer'}}
+                    </ion-button>
                 </header>
 
                 <p *ngIf="map.loaded"

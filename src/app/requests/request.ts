@@ -24,7 +24,7 @@ export class Request {
     withToken: boolean = true,
   ): Observable<T> {
     url = prefixUrl ? environment.api.url + url : url
-    return this.httpClient.post<T>(url, data, this.getHeader(headers, false))
+    return this.httpClient.post<T>(url, data, this.getHeader(headers, withToken))
   }
 
   getHeader (

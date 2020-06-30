@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
 import { LocalService } from '../../../services/local/local.service'
+import * as Moment from 'moment'
 
 @Component({
   selector: 'app-green-walk',
@@ -22,6 +23,7 @@ export class GreenWalkPage implements OnInit {
 
   state = {
     isRegister: false,
+    isPast: false,
   }
 
   map = {
@@ -50,6 +52,8 @@ export class GreenWalkPage implements OnInit {
         this.state.isRegister = greenWalk.participants.filter(
           participant => user.id === participant.id,
         ).length !== 0
+
+        this.state.isPast = Moment().isAfter(greenWalk.datetime)
 
       }).catch(() => {
         this.navController.navigateRoot(['/'])

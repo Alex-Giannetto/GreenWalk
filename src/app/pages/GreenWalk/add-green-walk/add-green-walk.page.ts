@@ -45,7 +45,7 @@ export class AddGreenWalkPage implements OnInit {
 			const location = await this.geolocationService.getAddressInfoFormCoordinate(this.coordinates)
 			this.formGroup.patchValue({ location: { ...location, ...this.coordinates } })
 		} catch (e) {
-			(await this.toastController.create({
+			await (await this.toastController.create({
 				message: 'Une erreur est survenue',
 				duration: 1000,
 				position: 'top',
@@ -70,13 +70,17 @@ export class AddGreenWalkPage implements OnInit {
 				data.datetime = Moment().add(10, 'm').format('YYYY-MM-DD HH:mm:ss')
 			}
 
-			const id = await this.greenWalkRequest.add(data).toPromise()
+			const request = await this.greenWalkRequest.add(data).toPromise()
 			this.formGroup.reset()
-			await this.navController.navigateRoot('/green-walks/' + id)
+			if(request.id){
+				await this.navController.navigateRoot('/green-walks/' + request.id)
+			} else {
+				await this.navController.navigateRoot('/')
+			}
 
 		} catch (e) {
 			console.error(e);
-			(await this.toastController.create({
+			await (await this.toastController.create({
 				message: 'Une erreur est survenue',
 				duration: 1000,
 				position: 'top',
