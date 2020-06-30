@@ -32,9 +32,9 @@
 
                     <ion-button
                             expand="block"
-                            [color]="state.isRegister? 'medium': 'primary' "
-                            (click)="registerAndUnregisterToGreenWalk()"
-                            [disabled]="!greenWalk || state.isPast">
+                            *ngIf="!state.isPast"
+                            [color]="(state.isRegister || !map.loaded) ? 'medium': 'primary' "
+                            (click)="registerAndUnregisterToGreenWalk()">
                         {{state.isRegister ? 'Désinscription' : 'Participer'}}
                     </ion-button>
                 </header>

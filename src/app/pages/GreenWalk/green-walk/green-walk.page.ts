@@ -53,7 +53,8 @@ export class GreenWalkPage implements OnInit {
           participant => user.id === participant.id,
         ).length !== 0
 
-        this.state.isPast = Moment().isAfter(greenWalk.datetime)
+
+        this.state.isPast = Moment(greenWalk.datetime).isBefore(Moment())
 
       }).catch(() => {
         this.navController.navigateRoot(['/'])
@@ -64,7 +65,7 @@ export class GreenWalkPage implements OnInit {
   async registerAndUnregisterToGreenWalk () {
     try {
       // check if user already register to that grenwalk
-      const request = await this.greenWalkRequest.registerUnregister(
+      await this.greenWalkRequest.registerUnregister(
         this.greenWalk.id,
         this.state.isRegister,
       )
