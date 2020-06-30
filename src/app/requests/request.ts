@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { environment } from '../../environments/environment'
 import { LocalService } from '../services/local/local.service'
+import { NavController, ToastController } from '@ionic/angular'
+import { AuthService } from '../services/auth/auth.service'
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +33,13 @@ export class Request {
     return this.httpClient.post<T>(url, data, this.getHeader(headers, withToken))
   }
 
+  delete<T> (
+    url: string, headers: { [key: string]: string } = null,
+    prefixUrl: boolean = true, withToken: boolean = true): Observable<T> {
+    url = prefixUrl ? environment.api.url + url : url
+    return this.httpClient.delete<T>(url, this.getHeader(headers, withToken))
+  }
+
   getHeader (
     externalHeader: { [key: string]: string },
     withToken = true): { headers: HttpHeaders } {
@@ -44,5 +57,25 @@ export class Request {
       ...externalHeader,
     })
     return { headers }
+  }
+
+  static HandleError(error: HttpErrorResponse, toastController: ToastController, navController: NavController){
+    if([401, 403].indexOf(error.status)){
+      toastController.create({
+        message: "Veuillez vous reconnecter",
+        duration: 2000,
+        position: 'top',
+        color: 'danger'
+      }).then(toast => toast.present().then())
+      return navController.navigateRoot('/login')
+    }
+
+    toastController.create({
+      message: "Une erreur est survenue",
+      duration: 2000,
+      position: 'top',
+      color: 'danger'
+    }).then(toast => toast.present().then())
+
   }
 }

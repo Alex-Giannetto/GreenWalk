@@ -32,6 +32,8 @@ export class AuthService {
 					reject('Mauvais retours de l\'api')
 				}
 
+				localStorage.setItem('user', JSON.stringify({token: data.token}))
+
 				if (await this.setUser(data.token)) {
 					resolve(true)
 				}

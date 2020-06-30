@@ -11,6 +11,7 @@ import {
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
 import { LocalService } from '../../../services/local/local.service'
 import * as Moment from 'moment'
+import { Request } from '../../../requests/request'
 
 @Component({
   selector: 'app-green-walk',
@@ -24,6 +25,7 @@ export class GreenWalkPage implements OnInit {
   state = {
     isRegister: false,
     isPast: false,
+    canDelete: false,
   }
 
   map = {
@@ -53,8 +55,8 @@ export class GreenWalkPage implements OnInit {
           participant => user.id === participant.id,
         ).length !== 0
 
-
         this.state.isPast = Moment(greenWalk.datetime).isBefore(Moment())
+        this.state.canDelete = this.canDelete(greenWalk)
 
       }).catch(() => {
         this.navController.navigateRoot(['/'])
@@ -78,12 +80,7 @@ export class GreenWalkPage implements OnInit {
       }
       this.state.isRegister = !this.state.isRegister
     } catch (e) {
-      await (await this.toastController.create({
-        message: 'Une erreur est survenue',
-        duration: 1000,
-        position: 'top',
-        color: 'danger',
-      })).present()
+      Request.HandleError(e, this.toastController, this.navController)
     }
   }
 
@@ -127,6 +124,21 @@ export class GreenWalkPage implements OnInit {
         this.greenWalk.location.coordinates.latitude + ',' +
         this.greenWalk.location.coordinates.longitude
     }
+  }
+
+  canDelete (greenwalk: GreenWalkInterface): boolean {
+    return (greenwalk.author.id === LocalService.user.id) ||
+      LocalService.user.roles.indexOf('ROLE_ADMIN') > -1
+  }
+
+  async delete () {
+    try {
+      await this.greenWalkRequest.delete(this.greenWalk.id)
+      await this.navController.navigateRoot('/')
+    } catch (e) {
+      Request.HandleError(e, this.toastController, this.navController)
+    }
+
   }
 
 }

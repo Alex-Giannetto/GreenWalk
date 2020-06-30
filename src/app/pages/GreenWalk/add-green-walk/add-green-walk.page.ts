@@ -7,6 +7,7 @@ import { LocationModalComponent } from '../../../components/location-modal/locat
 import { GeolocationService } from '../../../services/geolocation/geolocation.service'
 import { CoordinatesInterface } from '../../../interfaces/coordinates.Interface'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
+import { Request } from '../../../requests/request'
 
 @Component({
 	selector: 'app-add-green-walk',
@@ -45,12 +46,7 @@ export class AddGreenWalkPage implements OnInit {
 			const location = await this.geolocationService.getAddressInfoFormCoordinate(this.coordinates)
 			this.formGroup.patchValue({ location: { ...location, ...this.coordinates } })
 		} catch (e) {
-			await (await this.toastController.create({
-				message: 'Une erreur est survenue',
-				duration: 1000,
-				position: 'top',
-				color: 'danger',
-			})).present()
+			Request.HandleError(e, this.toastController, this.navController)
 		}
 	}
 
@@ -79,14 +75,7 @@ export class AddGreenWalkPage implements OnInit {
 			}
 
 		} catch (e) {
-			console.error(e);
-			await (await this.toastController.create({
-				message: 'Une erreur est survenue',
-				duration: 1000,
-				position: 'top',
-				color: 'danger',
-			})).present()
-
+			Request.HandleError(e, this.toastController, this.navController)
 		} finally { await loading.dismiss() }
 	}
 }

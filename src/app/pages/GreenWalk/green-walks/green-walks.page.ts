@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { GreenWalkLightInterface } from '../../../interfaces/green-walk-light.interface'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
 import { GeolocationService } from '../../../services/geolocation/geolocation.service'
-import { ModalController } from '@ionic/angular'
+import { ModalController, NavController, ToastController } from '@ionic/angular'
 import { LocalService } from '../../../services/local/local.service'
 import { LocationModalComponent } from '../../../components/location-modal/location-modal.component'
+import { Request } from '../../../requests/request'
+import { CoordinatesInterface } from '../../../interfaces/coordinates.Interface'
 
 @Component({
   selector: 'app-green-walks',
@@ -15,6 +17,7 @@ export class GreenWalksPage implements OnInit {
 
   state = {
     loading: false,
+    coordinates: {longitude: 0, latitude: 0}
   }
 
   greenWalks: GreenWalkLightInterface[] = []
@@ -23,22 +26,23 @@ export class GreenWalksPage implements OnInit {
     private greenWalkRequestService: GreenWalkRequest,
     private geolocationService: GeolocationService,
     private modalController: ModalController,
+    private toastController: ToastController,
+    private navController: NavController
   ) {}
 
   async ngOnInit () {
     this.state.loading = true
     try {
-      await this.geolocationService.getLastLocation()
-      await this.init()
+      this.state.coordinates = (await this.geolocationService.getLastLocation()).coordinates
+      await this.init(this.state.coordinates)
 
     } catch (e) {
-      console.error('GreenWalks::onInit', e)
       await this.chooseLocation()
     }
   }
 
   ionViewWillEnter () {
-    this.init()
+    this.init(this.state.coordinates)
   }
 
   async chooseLocation () {
@@ -55,17 +59,22 @@ export class GreenWalksPage implements OnInit {
     await modal.present()
     const { data: coordinates } = await modal.onWillDismiss()
     await this.geolocationService.setLocation(coordinates)
-    await this.init()
+    await this.init(coordinates)
   }
 
-  async init (event = null) {
-    this.state.loading = true
-    this.greenWalks = await this.greenWalkRequestService.getAll(
-      LocalService.location.coordinates)
-    this.state.loading = false
-
-    if (event) {
-      event.target.complete()
+  async init (coordinates: CoordinatesInterface, event = null) {
+    try {
+      this.state.loading = true
+      this.greenWalks = await this.greenWalkRequestService.getAll(
+        coordinates
+      )
+      this.state.loading = false
+    } catch (e) {
+      Request.HandleError(e, this.toastController, this.navController)
+    } finally {
+      if (event) {
+        event.target.complete()
+      }
     }
   }
 

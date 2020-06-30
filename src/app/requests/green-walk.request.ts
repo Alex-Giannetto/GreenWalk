@@ -27,7 +27,7 @@ export class GreenWalkRequest {
           latitude: data.latitude,
           longitude: data.longitude,
         },
-      }
+      },
     }
   }
 
@@ -36,7 +36,7 @@ export class GreenWalkRequest {
       ...GreenWalkRequest.convertGreenWalkLight(data),
       description: data.description,
       state: data.state,
-      comments: data.comments
+      comments: data.comments,
     }
   }
 
@@ -45,7 +45,8 @@ export class GreenWalkRequest {
 
     return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
       this.requestService.get(url).subscribe(
-        (data: any[]) => resolve(data.map(GreenWalkRequest.convertGreenWalkLight)),
+        (data: any[]) => resolve(
+          data.map(GreenWalkRequest.convertGreenWalkLight)),
         reject,
       )
     })
@@ -62,12 +63,13 @@ export class GreenWalkRequest {
     })
   }
 
-  getUserRegisteredGreenWalk(): Promise<GreenWalkLightInterface[]>{
+  getUserRegisteredGreenWalk (): Promise<GreenWalkLightInterface[]> {
     const url = `greenwalk/getGreenwalk`
 
     return new Promise<GreenWalkLightInterface[]>((resolve, reject) => {
       this.requestService.get(url).subscribe(
-        (data: any[]) => resolve(data.map(GreenWalkRequest.convertGreenWalkLight)),
+        (data: any[]) => resolve(
+          data.map(GreenWalkRequest.convertGreenWalkLight)),
         reject,
       )
     })
@@ -77,9 +79,14 @@ export class GreenWalkRequest {
     return this.requestService.post('greenwalk', { ...greenwalk })
   }
 
-  registerUnregister(id: string, registered: boolean): Promise<boolean>{
-    const url = `greenwalk/${id}/${registered? 'unsubscribe' : 'subscribe'}`
+  registerUnregister (id: string, registered: boolean): Promise<boolean> {
+    const url = `greenwalk/${id}/${registered ? 'unsubscribe' : 'subscribe'}`
     return this.requestService.get<boolean>(url).toPromise<boolean>()
+  }
+
+  delete (id: string): Promise<boolean> {
+    const url = `greenwalk/${id}`
+    return this.requestService.delete<boolean>(url).toPromise<boolean>()
   }
 
 }
