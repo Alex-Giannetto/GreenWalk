@@ -23,6 +23,10 @@ export class LocalService {
 		return user ? user.token : null
 	}
 
+	static set token (token){
+		localStorage.setItem('user', JSON.stringify({token}))
+	}
+
 	static setUser (user: UserInterface): void {
 		localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(user))
 	}

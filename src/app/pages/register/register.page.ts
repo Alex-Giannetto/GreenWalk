@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth/auth.service'
 import { LoadingController, NavController, ToastController } from '@ionic/angular'
 import * as Moment from 'moment'
 import { DATE_FORMAT_FR, DATE_FORMAT_US } from '../../validators/age.validator'
+import { Request } from '../../requests/request'
 
 @Component({
 	selector: 'app-registration',
@@ -62,12 +63,7 @@ export class RegisterPage {
 			await this.navController.navigateRoot('/home')
 
 		} catch (e) {
-			(await this.toastController.create({
-				message: e.error.messages || 'Une erreur est survenue',
-				position: 'top',
-				color: 'danger',
-				duration: 5000
-			})).present()
+			Request.HandleError(e, this.toastController, this.navController)
 		} finally {
 			await this.loadingController.dismiss()
 		}

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core'
 import { GreenWalkLightInterface } from '../../../interfaces/green-walk-light.interface'
 import { LocalService } from '../../../services/local/local.service'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
-import { Platform } from '@ionic/angular'
+import { NavController, Platform, ToastController } from '@ionic/angular'
 import * as Moment from 'moment'
+import { Request } from '../../../requests/request'
 
 @Component({
   selector: 'app-my-green-walks',
@@ -20,7 +21,9 @@ export class MyGreenWalksPage {
 
   constructor (
     private greenWalkRequest: GreenWalkRequest,
-    public platform: Platform,
+    private toastController: ToastController,
+    private navController: NavController,
+    public platform: Platform
   ) {}
 
   ionViewWillEnter(){
@@ -28,15 +31,19 @@ export class MyGreenWalksPage {
   }
 
   init (event = null) {
-    this.state.loading = true
-    this.greenWalkRequest.getUserRegisteredGreenWalk().then( greenwalks => {
+    try {
+      this.state.loading = true
+      this.greenWalkRequest.getUserRegisteredGreenWalk().then( greenwalks => {
         this.greenWalks = greenwalks
         this.state.loading = false
-
-        if (event) {
-          event.target.complete()
-        }
       })
+    } catch (e) {
+      Request.HandleError(e, this.toastController, this.navController)
+    } finally {
+      if (event) {
+        event.target.complete()
+      }
+    }
   }
 
   filter (): GreenWalkLightInterface[] {

@@ -8,7 +8,7 @@
             <ion-icon (click)="back()" class="btn float touchable" name="chevron-back-outline"></ion-icon>
             <div>
                 <ion-icon (click)="openMapsApp()" class="btn float touchable" name="map-outline"></ion-icon>
-                <ion-icon class="btn float touchable" color="danger" name="trash"></ion-icon>
+                <ion-icon *ngIf="state.canDelete" (click)="delete()" class="btn float touchable" color="danger" name="trash"></ion-icon>
             </div>
         </div>
 
@@ -32,9 +32,9 @@
 
                     <ion-button
                             expand="block"
-                            [color]="state.isRegister? 'medium': 'primary' "
-                            (click)="registerAndUnregisterToGreenWalk()"
-                            [disabled]="!greenWalk || state.isPast">
+                            *ngIf="!state.isPast"
+                            [color]="(state.isRegister || !map.loaded) ? 'medium': 'primary' "
+                            (click)="registerAndUnregisterToGreenWalk()">
                         {{state.isRegister ? 'Désinscription' : 'Participer'}}
                     </ion-button>
                 </header>
