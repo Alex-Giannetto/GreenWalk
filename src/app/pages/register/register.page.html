@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-buttons (click)="backTologin()" slot="start" [hidden]="step < 1" class="ion-activatable ripple-parent">
+        <ion-buttons (click)="backTologin()" slot="start" [hidden]="step !== 1" class="ion-activatable ripple-parent">
             <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
             Se connecter
             <ion-ripple-effect></ion-ripple-effect>
