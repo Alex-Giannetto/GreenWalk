@@ -30,7 +30,7 @@ export class LocationModalComponent implements OnInit {
 
 		this.map.addControl(new NavigationControl())
 
-		setTimeout(() => this.map.resize(), 1)
+		setTimeout(() => this.map.resize(), 100)
 	}
 
 	async setLocationBtnClicked () {
