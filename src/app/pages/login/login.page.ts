@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
 		private toastController: ToastController,
 	) { }
 
+	// init the form
 	ngOnInit (): void {
 		this.formGroup = this.formBuilder.group({
 			email: new FormControl(null, [
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
 		})
 	}
 
+	// send the login request then redirect to the home
 	async onSubmit () {
 		const { email, password } = this.formGroup.value
 
@@ -47,7 +49,7 @@ export class LoginPage implements OnInit {
 		this.authService.signIn(email, password).then(async success => {
 			this.navController.navigateRoot('/home').then()
 		}).catch(async e => {
-			Request.HandleError(e, this.toastController, this.navController)
+			await Request.HandleError(e, this.toastController, this.navController)
 		}).finally(async () => {
 			await loading.dismiss()
 		})

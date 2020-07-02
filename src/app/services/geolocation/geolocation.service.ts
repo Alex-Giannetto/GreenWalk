@@ -12,6 +12,7 @@ export class GeolocationService {
 
 	constructor (private geolocation: Geolocation, private locationRequest: LocationRequest) { }
 
+	// Return the current location
 	getLastLocation (): Promise<LocationInterface> {
 		if (LocalService.location) { return Promise.resolve(LocalService.location) }
 
@@ -22,6 +23,7 @@ export class GeolocationService {
 			catch(e => Promise.reject(e))
 	}
 
+	// Transform coordinates point into readable address
 	async getAddressInfoFormCoordinate (coordinates: CoordinatesInterface):
 		Promise<{ full: string, street: string, city: string, zipCode: string, country: string }> {
 		const data = await this.locationRequest.getAddressFromCoordinate(coordinates).toPromise()
@@ -42,6 +44,7 @@ export class GeolocationService {
 		})
 	}
 
+	// Save the location (with coordinate) in the localstorage
 	async setLocation (coordinates: CoordinatesInterface) {
 		return new Promise<any>(async resolve => {
 			let street: string

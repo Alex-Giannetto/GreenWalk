@@ -10,6 +10,7 @@ export class AuthService {
 
 	constructor (private authRequestService: AuthRequest) { }
 
+	// Get the user from the token and store it in the LocalStorage
 	setUser (token: string): Promise<UserInterface> {
 		return new Promise<UserInterface>((resolve, reject) => {
 			this.authRequestService.getUser(token).subscribe(data => {
@@ -24,6 +25,7 @@ export class AuthService {
 		})
 	}
 
+	// SignIn method
 	signIn (email: string, password: string): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
 			this.authRequestService.signIn(email, password).subscribe(async data => {
@@ -44,6 +46,7 @@ export class AuthService {
 		})
 	}
 
+	// Register method
 	register (email: string, firstName: string, birthDate: string, password: string): Promise<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
 			this.authRequestService.register(email, firstName, birthDate, password).subscribe(async data => {

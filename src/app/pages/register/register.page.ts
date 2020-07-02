@@ -18,15 +18,17 @@ export class RegisterPage {
 
 	constructor (
 		private authService: AuthService,
-		private navController: NavController,
 		private toastController: ToastController,
-		private loadingController: LoadingController
+		private loadingController: LoadingController,
+		public navController: NavController
 	) {}
 
+	// check if the current part of the form is valid
 	isGroupIsValid (): boolean {
 		return this.getGroup(this.step).valid
 	}
 
+	// change the current part of the form
 	nextStep (): void {
 		if (this.getGroup(this.step).invalid) {
 			return
@@ -39,12 +41,14 @@ export class RegisterPage {
 		this.step++
 	}
 
+	// change the current part of the form
 	previousStep (): void {
 		if (this.step > 1) {
 			this.step--
 		}
 	}
 
+	// send the register request
 	async submit (): Promise<null> {
 		if (this.formGroup.invalid) {
 			return
@@ -68,10 +72,6 @@ export class RegisterPage {
 			await this.loadingController.dismiss()
 		}
 
-	}
-
-	backTologin(){
-		this.navController.back()
 	}
 
 	private getGroup (step: number): FormGroup {

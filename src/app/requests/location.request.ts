@@ -11,6 +11,7 @@ export class LocationRequest {
 
 	constructor (private requestService: Request) {}
 
+	// Request to get the adress from a latitude and longitude
 	getAddressFromCoordinate (coordinates: CoordinatesInterface): Observable<any> {
 		return this.requestService.get(
 			'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
