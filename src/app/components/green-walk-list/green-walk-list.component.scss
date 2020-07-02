@@ -1,0 +1,13 @@
+.greenWalks {
+  padding: var(--ion-padding);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--ion-padding);
+
+  @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

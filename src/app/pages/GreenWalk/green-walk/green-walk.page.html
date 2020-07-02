@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true" id="page">
+    <ion-header>
+        <img [src]="getMap()|safe:'url'" id="map" [style.opacity]="map.loaded? 1 : 0" (load)="map.loaded = true">
+    </ion-header>
+
+    <ion-content [fullscreen]="true" id="content">
+        <div class="navigation-bar">
+            <ion-icon (click)="navController.back()" class="btn float touchable" name="chevron-back-outline"></ion-icon>
+            <div>
+                <ion-icon (click)="openMapsApp()" class="btn float touchable" name="map-outline"></ion-icon>
+                <ion-icon *ngIf="state.canDelete" (click)="delete()" class="btn float touchable" color="danger" name="trash"></ion-icon>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="elements">
+                <header class="ion-padding-horizontal">
+                    <h1 *ngIf="map.loaded else loading">{{greenWalk.name}}</h1>
+                    <h2 *ngIf="map.loaded else loading">{{greenWalk.datetime | dateDifference:true:true: false}}</h2>
+                    <div class="subtitle ion-padding-bottom">
+                        <div class="location">
+                            <ion-icon name="pin"></ion-icon>
+                            <div class="text">
+                                <ng-container *ngIf="map.loaded else loading">
+                                    {{greenWalk.location.city + ' ' + greenWalk.location.zipCode}}
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <app-participants *ngIf="map.loaded" [greenWalk]="greenWalk"></app-participants>
+                    </div>
+
+                    <ion-button
+                            expand="block"
+                            *ngIf="!state.isPast"
+                            [color]="(state.isRegister || !map.loaded) ? 'medium': 'primary' "
+                            (click)="registerAndUnregisterToGreenWalk()">
+                        {{state.isRegister ? 'Désinscription' : 'Participer'}}
+                    </ion-button>
+                </header>
+
+                <p *ngIf="map.loaded"
+                   [innerHTML]="greenWalk.description | nl2br"
+                   class="description ion-padding-horizontal"
+                ></p>
+
+                <div *ngIf="!map.loaded" class="description ion-padding-horizontal">
+                    <br>
+                    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+
+</ion-content>
+
+<ng-template #loading>
+    <ion-skeleton-text animated style="width: 100%; min-width: 50px"></ion-skeleton-text>
+</ng-template>

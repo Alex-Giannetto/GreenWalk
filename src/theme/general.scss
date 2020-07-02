@@ -1,0 +1,55 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Roboto, sans-serif;
+  outline: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-callout: none;
+  -webkit-touch-callout: none;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  &_title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  &_subtitle {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+/* TODO remove once fixed in framework */
+.ios .header-collapse-condense ion-toolbar {
+  --background: var(--ion-background-color, #fff);
+}
+
+
+.touchable {
+  transition: all .5s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(.95);
+  }
+
+  &:disabled{
+    &:active, &:hover{
+      transform: none;
+    }
+  }
+}
+
+ion-skeleton-text {
+  border-radius: 0;
+  height: 15px;
+}

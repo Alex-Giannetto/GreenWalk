@@ -1,0 +1,19 @@
+.btn {
+  font-size: 1.4rem;
+  width: 100%;
+  transform: scale(1);
+  transition: all .1s;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(#000, .16);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+  background-color: var(--ion-color-primary);
+  color: white;
+  padding: calc(var(--ion-padding) / 2);
+  border-radius: var(--border-radius);
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

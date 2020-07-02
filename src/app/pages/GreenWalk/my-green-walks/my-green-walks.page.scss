@@ -1,0 +1,18 @@
+.toolbar {
+  width: 100%;
+  padding: var(--ion-padding);
+  padding-bottom: 0;
+
+  ion-segment{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 35px;
+
+    background-color: var(--color-filter-segment-background);
+
+    ion-segment-button{
+      --indicator-color: var(--color-filter-segment);
+    }
+  }
+}
+

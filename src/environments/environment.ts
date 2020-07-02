@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+	production: false,
+	api: {
+		url: 'http://MacBook-Pro-de-Alex.local:8080/api/'
+	},
+	mapBox: {
+		token: 'pk.eyJ1IjoiYWxleGc3OGJpcyIsImEiOiJjazEzZXR2MGQwN2FqM2NtOTk1bjJ2N3ZlIn0.ot8SN9Ue3V-Lmx_hw5gpog'
+	}
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
@@ -14,3 +20,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+

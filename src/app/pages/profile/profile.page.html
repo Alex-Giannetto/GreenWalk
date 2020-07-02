@@ -1,0 +1,26 @@
+<div class="grid">
+    <header class="ion-margin">
+        <app-avatar [person]="user" size="big"></app-avatar>
+        <h1>{{user.firstName}}</h1>
+    </header>
+
+
+    <ion-content>
+        <div class="content ion-padding-horizontal">
+            <div class="join">
+                <button class="element" (click)="toastNextVersion()">Modifier mes informations</button>
+
+                <button class="element" (click)="toastNextVersion()">Mes amis</button>
+
+                <button class="element" (click)="toastNextVersion()">Mes notifications</button>
+
+                <div class="element">
+                    <p>Activer mails de notifications</p>
+                    <ion-toggle (ionChange)="toastNextVersion()" checked="true"></ion-toggle>
+                </div>
+            </div>
+
+            <button (click)="logOut()" class="element touchable ion-justify-content-center">Déconnexion</button>
+        </div>
+    </ion-content>
+</div>

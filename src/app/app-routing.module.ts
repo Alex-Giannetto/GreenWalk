@@ -1,22 +1,45 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
+import { AuthentificationGuard } from './guards/authentification.guard'
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full'
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'home',
+    loadChildren: () => import('./pages/home-tabs/home-tabs.module').then(
+      m => m.HomeTabsPageModule),
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(
+      m => m.LoginPageModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(
+      m => m.RegistrationPageModule),
+  },
+  {
+    path: 'green-walks',
+    loadChildren: './pages/GreenWalk/green-walk.module#GreenWalkModule',
+    canActivate: [AuthentificationGuard],
+  },
+  {
+    path: '**',
+    redirectTo: 'green-walks',
   }
-];
+]
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
