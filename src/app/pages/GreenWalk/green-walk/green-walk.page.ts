@@ -2,143 +2,149 @@ import { Component, OnInit } from '@angular/core'
 import { GreenWalkInterface } from '../../../interfaces/green-walk.interface'
 import { MapService } from '../../../services/map/map.service'
 import { ActivatedRoute } from '@angular/router'
-import {
-  LoadingController,
-  NavController,
-  Platform,
-  ToastController,
-} from '@ionic/angular'
+import { LoadingController, NavController, Platform, ToastController, } from '@ionic/angular'
 import { GreenWalkRequest } from '../../../requests/green-walk.request'
 import { LocalService } from '../../../services/local/local.service'
 import * as Moment from 'moment'
 import { Request } from '../../../requests/request'
 
 @Component({
-  selector: 'app-green-walk',
-  templateUrl: './green-walk.page.html',
-  styleUrls: ['./green-walk.page.scss'],
+	selector: 'app-green-walk',
+	templateUrl: './green-walk.page.html',
+	styleUrls: ['./green-walk.page.scss'],
 })
 export class GreenWalkPage implements OnInit {
 
-  greenWalk: GreenWalkInterface
+	greenWalk: GreenWalkInterface
 
-  state = {
-    isRegister: false,
-    isPast: false,
-    canDelete: false,
-  }
+	state = {
+		isRegister: false,
+		isPast: false,
+		canDelete: false,
+	}
 
-  map = {
-    url: null,
-    loaded: false,
-  }
+	map = {
+		url: null,
+		loaded: false,
+	}
 
-  constructor (
-    private mapService: MapService,
-    private activatedRoute: ActivatedRoute,
-    private loadingController: LoadingController,
-    private platform: Platform,
-    private navController: NavController,
-    private greenWalkRequest: GreenWalkRequest,
-    private toastController: ToastController,
-  ) { }
+	constructor (
+		private mapService: MapService,
+		private activatedRoute: ActivatedRoute,
+		private loadingController: LoadingController,
+		private platform: Platform,
+		private navController: NavController,
+		private greenWalkRequest: GreenWalkRequest,
+		private toastController: ToastController,
+	) { }
 
-  async ngOnInit () {
-    const id = this.activatedRoute.snapshot.paramMap.get('id')
+	async ngOnInit () {
+		const id = this.activatedRoute.snapshot.paramMap.get('id')
 
-    this.greenWalkRequest.getOneById(id).then(
-      greenWalk => {
-        this.greenWalk = greenWalk
+		this.greenWalkRequest.getOneById(id).then(
+			greenWalk => {
+				this.greenWalk = greenWalk
 
-        const user = LocalService.user
-        this.state.isRegister = greenWalk.participants.filter(
-          participant => user.id === participant.id,
-        ).length !== 0
+				const user = LocalService.user
+				this.state.isRegister = greenWalk.participants.filter(
+					participant => user.id === participant.id,
+				).length !== 0
 
-        this.state.isPast = Moment(greenWalk.datetime).isBefore(Moment())
-        this.state.canDelete = this.canDelete(greenWalk)
+				this.state.isPast = Moment(greenWalk.datetime).isBefore(Moment())
+				this.state.canDelete = this.canDelete(greenWalk)
 
-      }).catch(() => {
-        this.navController.navigateRoot(['/'])
-      },
-    )
-  }
+			}).catch(() => {
+				this.navController.navigateRoot(['/'])
+			},
+		)
+	}
 
-  async registerAndUnregisterToGreenWalk () {
-    try {
-      // check if user already register to that grenwalk
-      await this.greenWalkRequest.registerUnregister(
-        this.greenWalk.id,
-        this.state.isRegister,
-      )
+	async registerAndUnregisterToGreenWalk () {
+		try {
+			// check if user already register to that grenwalk
+			await this.greenWalkRequest.registerUnregister(
+				this.greenWalk.id,
+				this.state.isRegister,
+			)
 
-      if (this.state.isRegister) {
-        this.greenWalk.participants = this.greenWalk.participants.filter(
-          participant => LocalService.user.id !== participant.id)
-      } else {
-        this.greenWalk.participants.push(LocalService.user)
-      }
-      this.state.isRegister = !this.state.isRegister
-    } catch (e) {
-      Request.HandleError(e, this.toastController, this.navController)
-    }
-  }
+			if (this.state.isRegister) {
+				this.greenWalk.participants = this.greenWalk.participants.filter(
+					participant => LocalService.user.id !== participant.id)
+			} else {
+				this.greenWalk.participants.push(LocalService.user)
+				const toast = await this.toastController.create({
+					message: 'Attention cette GreenWalk n\'a pas été crée par l\'équipe mais par la communauté. Soyez prudent lors des sorties.',
+					position: 'top',
+					buttons: [
+						{
+							text: 'ok'
+						}
+					],
+				})
 
-  getMap (): string {
-    if (!this.greenWalk) {
-      return ''
-    }
+				await toast.present()
+			}
+			this.state.isRegister = !this.state.isRegister
+		} catch (e) {
+			await Request.HandleError(e, this.toastController, this.navController)
+		}
+	}
 
-    const element = document.getElementById('map')
+	getMap (): string {
+		if (!this.greenWalk) {
+			return ''
+		}
 
-    if (element.offsetWidth === 0 || element.offsetHeight === 0) {
-      return ''
-    }
+		const element = document.getElementById('map')
 
-    const width = element.offsetWidth > 0 && element.offsetWidth < 1280
-      ? element.offsetWidth
-      : 1280
-    const height = element.offsetHeight > 0 && element.offsetHeight < 1280
-      ? element.offsetHeight
-      : 1280
-    this.map.url = this.mapService.getMap(this.greenWalk.location.coordinates,
-      { width, height, zoom: 13 })
-    return this.map.url
-  }
+		if (element.offsetWidth === 0 || element.offsetHeight === 0) {
+			return ''
+		}
 
-  mapIsLoaded () {
-    this.map.loaded = true
-  }
+		const width = element.offsetWidth > 0 && element.offsetWidth < 1280
+			? element.offsetWidth
+			: 1280
+		const height = element.offsetHeight > 0 && element.offsetHeight < 1280
+			? element.offsetHeight
+			: 1280
+		this.map.url = this.mapService.getMap(this.greenWalk.location.coordinates,
+			{ width, height, zoom: 13 })
+		return this.map.url
+	}
 
-  back () {
-    this.navController.back()
-  }
+	mapIsLoaded () {
+		this.map.loaded = true
+	}
 
-  openMapsApp () {
-    if (this.platform.is('android')) {
-      window.location.href = 'geo:' +
-        this.greenWalk.location.coordinates.latitude + ',' +
-        this.greenWalk.location.coordinates.longitude
-    } else {
-      window.location.href = 'maps://maps.apple.com/?q=' +
-        this.greenWalk.location.coordinates.latitude + ',' +
-        this.greenWalk.location.coordinates.longitude
-    }
-  }
+	back () {
+		this.navController.back()
+	}
 
-  canDelete (greenwalk: GreenWalkInterface): boolean {
-    return (greenwalk.author.id === LocalService.user.id) ||
-      LocalService.user.roles.indexOf('ROLE_ADMIN') > -1
-  }
+	openMapsApp () {
+		if (this.platform.is('android')) {
+			window.location.href = 'geo:' +
+				this.greenWalk.location.coordinates.latitude + ',' +
+				this.greenWalk.location.coordinates.longitude
+		} else {
+			window.location.href = 'maps://maps.apple.com/?q=' +
+				this.greenWalk.location.coordinates.latitude + ',' +
+				this.greenWalk.location.coordinates.longitude
+		}
+	}
 
-  async delete () {
-    try {
-      await this.greenWalkRequest.delete(this.greenWalk.id)
-      await this.navController.navigateRoot('/')
-    } catch (e) {
-      Request.HandleError(e, this.toastController, this.navController)
-    }
+	canDelete (greenwalk: GreenWalkInterface): boolean {
+		return (greenwalk.author.id === LocalService.user.id) ||
+			LocalService.user.roles.indexOf('ROLE_ADMIN') > -1
+	}
 
-  }
+	async delete () {
+		try {
+			await this.greenWalkRequest.delete(this.greenWalk.id)
+			await this.navController.navigateRoot('/')
+		} catch (e) {
+			Request.HandleError(e, this.toastController, this.navController)
+		}
+
+	}
 
 }
