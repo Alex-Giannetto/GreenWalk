@@ -33,6 +33,7 @@ export class AddGreenWalkPage implements OnInit {
 		this.formGroup.patchValue({ location: { ...this.coordinates } })
 	}
 
+	// Open the location modal so that the user can select his coordinates
 	async openLocationModal () {
 		const modal = await this.modalController.create({
 			component: LocationModalComponent,
@@ -50,6 +51,9 @@ export class AddGreenWalkPage implements OnInit {
 		}
 	}
 
+	// Add a GreenWalk request
+	// If success => redirect to the new GreenWalk details page
+	// else show error
 	async onSubmit () {
 		const loading = await this.loadingController.create()
 
@@ -68,14 +72,10 @@ export class AddGreenWalkPage implements OnInit {
 
 			const request = await this.greenWalkRequest.add(data).toPromise()
 			this.formGroup.reset()
-			if(request.id){
-				await this.navController.navigateRoot('/green-walks/' + request.id)
-			} else {
-				await this.navController.navigateRoot('/')
-			}
+			await this.navController.navigateRoot('/green-walks/' + request.id)
 
 		} catch (e) {
-			Request.HandleError(e, this.toastController, this.navController)
+			await Request.HandleError(e, this.toastController, this.navController)
 		} finally { await loading.dismiss() }
 	}
 }

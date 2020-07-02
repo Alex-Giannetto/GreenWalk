@@ -38,6 +38,8 @@ export class GreenWalkPage implements OnInit {
 		private toastController: ToastController,
 	) { }
 
+	// Get the GreenWalk detail
+	// if the GreenWalk id passed in the url is not valid => redirect to the GreenWalk list
 	async ngOnInit () {
 		const id = this.activatedRoute.snapshot.paramMap.get('id')
 
@@ -59,6 +61,9 @@ export class GreenWalkPage implements OnInit {
 		)
 	}
 
+	// Check if the user already participate to the GreenWalk
+	// if already => unsubscribe
+	// else => show disclaimers popup then send subcribe request
 	async registerAndUnregisterToGreenWalk () {
 		try {
 			// check if user already register to that grenwalk
@@ -73,7 +78,7 @@ export class GreenWalkPage implements OnInit {
 			} else {
 				this.greenWalk.participants.push(LocalService.user)
 				const toast = await this.toastController.create({
-					message: 'Attention cette GreenWalk n\'a pas été crée par l\'équipe mais par la communauté. Soyez prudent lors des sorties.',
+					message: 'Attention ! L\'équipe Green Walk vous conseille la plus grande prudence lors des sorties. En effet, nous ne garantissons pas le bon déroulement de celles-ci.',
 					position: 'top',
 					buttons: [
 						{
@@ -90,6 +95,7 @@ export class GreenWalkPage implements OnInit {
 		}
 	}
 
+	// Get the map picture with the correct size
 	getMap (): string {
 		if (!this.greenWalk) {
 			return ''
@@ -112,14 +118,7 @@ export class GreenWalkPage implements OnInit {
 		return this.map.url
 	}
 
-	mapIsLoaded () {
-		this.map.loaded = true
-	}
-
-	back () {
-		this.navController.back()
-	}
-
+	// Open the integrated map app with correct coordinates
 	openMapsApp () {
 		if (this.platform.is('android')) {
 			window.location.href = 'geo:' +
@@ -132,17 +131,19 @@ export class GreenWalkPage implements OnInit {
 		}
 	}
 
+	// check if the user can delete the GreenWalk
 	canDelete (greenwalk: GreenWalkInterface): boolean {
 		return (greenwalk.author.id === LocalService.user.id) ||
 			LocalService.user.roles.indexOf('ROLE_ADMIN') > -1
 	}
 
+	// send the delete request then redirect to the GreenWalk list
 	async delete () {
 		try {
 			await this.greenWalkRequest.delete(this.greenWalk.id)
 			await this.navController.navigateRoot('/')
 		} catch (e) {
-			Request.HandleError(e, this.toastController, this.navController)
+			await Request.HandleError(e, this.toastController, this.navController)
 		}
 
 	}

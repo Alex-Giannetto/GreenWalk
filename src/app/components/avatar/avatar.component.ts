@@ -7,7 +7,6 @@ import { PersonInterface } from '../../interfaces/person.interface'
 	styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent {
-
 	@Input() person: PersonInterface
 	@Input() size: 'little' | 'big'
 	@Input() round: boolean

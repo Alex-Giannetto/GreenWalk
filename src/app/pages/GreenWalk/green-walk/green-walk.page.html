@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true" id="page">
     <ion-header>
-        <img [src]="getMap()|safe:'url'" id="map" [style.opacity]="map.loaded? 1 : 0" (load)="mapIsLoaded()">
+        <img [src]="getMap()|safe:'url'" id="map" [style.opacity]="map.loaded? 1 : 0" (load)="map.loaded = true">
     </ion-header>
 
     <ion-content [fullscreen]="true" id="content">
         <div class="navigation-bar">
-            <ion-icon (click)="back()" class="btn float touchable" name="chevron-back-outline"></ion-icon>
+            <ion-icon (click)="navController.back()" class="btn float touchable" name="chevron-back-outline"></ion-icon>
             <div>
                 <ion-icon (click)="openMapsApp()" class="btn float touchable" name="map-outline"></ion-icon>
                 <ion-icon *ngIf="state.canDelete" (click)="delete()" class="btn float touchable" color="danger" name="trash"></ion-icon>
