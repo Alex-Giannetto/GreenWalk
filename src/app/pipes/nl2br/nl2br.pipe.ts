@@ -8,6 +8,7 @@ export class Nl2brPipe implements PipeTransform {
 
 	constructor (private sanitizer: DomSanitizer) {}
 
+	// convert jump into <br>
 	transform (value: string): SafeHtml {
 		let result
 

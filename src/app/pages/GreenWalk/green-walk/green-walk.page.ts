@@ -33,9 +33,9 @@ export class GreenWalkPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private loadingController: LoadingController,
 		private platform: Platform,
-		private navController: NavController,
 		private greenWalkRequest: GreenWalkRequest,
 		private toastController: ToastController,
+		public navController: NavController,
 	) { }
 
 	// Get the GreenWalk detail

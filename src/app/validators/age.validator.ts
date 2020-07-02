@@ -4,6 +4,7 @@ import * as Moment from 'moment'
 export const DATE_FORMAT_US = 'YYYY-MM-DD'
 export const DATE_FORMAT_FR = 'DD/MM/YYYY'
 
+// Check if the user have the minimal age to register
 export const AgeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
 
 	for (const format of [DATE_FORMAT_US, DATE_FORMAT_FR]) {
